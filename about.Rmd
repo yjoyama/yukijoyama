@@ -7,19 +7,20 @@ output:
 ---
 
 ## Education
-2014-2020   Hamamatsu University School of Medicine, Shizuoka, Japan
-            Doctor of Medicine (MD), 2020
-2022-2023   St. Luke’s International University Graduate School of Public Health, Tokyo, Japan
-             Master of Public Health (MPH), 2023
-2023-present Columbia University Mailman School of Public Health
-              MS Biostatistics Public Health Data Science track
+2014-2020   **Hamamatsu University School of Medicine, Shizuoka, Japan**  
+            Doctor of Medicine (MD), 2020  
+2022-2023   **St. Luke’s International University Graduate School of Public Health, Tokyo, Japan**  
+             Master of Public Health (MPH), 2023  
+2023-present **Columbia University Mailman School of Public Health**  
+              MS Biostatistics Public Health Data Science track  
             
 ## Work Experience
 2020-2022   Full-time Resident Physician at Keio University Hospital, Tokyo, Japan
 
 ## Research in Progress
-Nobuhisa Morimoto, Hasan Jamil, Mohab Alakkari, Yuki Joyama, Tatsuhiko Anzai, Kunihiko Takahashi, Soichiro Iimori. 
-Associations between dietary potassium intake and urinary potassium excretion. PROSPERO 2022 CRD42022357847 [link](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42022357847) 
+Nobuhisa Morimoto, Hasan Jamil, Mohab Alakkari, Yuki Joyama, Tatsuhiko Anzai, Kunihiko Takahashi, Soichiro Iimori.   
+Associations between dietary potassium intake and urinary potassium excretion.   
+PROSPERO 2022 CRD42022357847 [(link)](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42022357847) 
 
 ## Skills
 R, Stata, Git

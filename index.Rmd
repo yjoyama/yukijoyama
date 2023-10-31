@@ -14,9 +14,11 @@ I am currently an MS Biostatistics student at Columbia University.
 
 You can find my academic and professional experience at  [About me](about.html)
 
+
+
 ## Contact Information
-Yuki Joyama
-MS Biostatistics candidate
-Columbia University Mailman School of Public Health
-722 W 168th St, New York, NY 10032
+Yuki Joyama  
+MS Biostatistics candidate  
+Columbia University Mailman School of Public Health  
+722 W 168th St, New York, NY 10032  
 yj2803@cumc.columbia.edu
