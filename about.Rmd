@@ -5,21 +5,21 @@ output:
     toc: false
     toc_float: false
 ---
-
+Updated: October 31, 2023
 $$\\$$
 
 
-## Education
+### Education
 ```{r ,echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |       |          | 
 |---------------|:--------------|
-| 2014-2020       | Hamamatsu University School of Medicine, Shizuoka, Japan | 
-||Doctor of Medicine (MD), 2020  |
-| 2022-2023      | St. Luke’s International University Graduate School of Public Health, Tokyo, Japan      |  
-||Master of Public Health (MPH), 2023 |
-| 2023-present | Columbia University Mailman School of Public Health     |  
-||MS Biostatistics Public Health Data Science track |
+| 04/2014-03/2020       | **Hamamatsu University School of Medicine, Shizuoka, Japan** | 
+||Doctor of Medicine (MD), March 2020  |
+| 04/2022-03/2023      | **St. Luke’s International University Graduate School of Public Health**, Tokyo, Japan      |  
+||Master of Public Health (MPH), March 2023 |
+| 09/2023-present | **Columbia University Mailman School of Public Health**, New York, NY     |  
+||Master of Science in Biostatistics, Expected graduation: May 2025 |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -27,32 +27,28 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 
 $$\\$$
 
-## Work Experience
+### Work Experience
 ```{r ,echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 tabl <- "
 |       |          | 
 |---------------|:--------------|
-| 2020-2022       | Full-time Resident Physician at Keio University Hospital, Tokyo, Japan | 
+| 04/2020-03/2022       | Full-time Resident Physician at Keio University Hospital, Tokyo, Japan | 
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 $$\\$$
 
-## Research in Progress
+### Research in Progress
 Nobuhisa Morimoto, Hasan Jamil, Mohab Alakkari, Yuki Joyama, Tatsuhiko Anzai, Kunihiko Takahashi, Soichiro Iimori.   
 Associations between dietary potassium intake and urinary potassium excretion.   
-PROSPERO 2022 CRD42022357847 [(link)](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42022357847) 
+PROSPERO 2022 CRD42022357847 [[link]](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42022357847) 
 
 $$\\$$
 
 ## Skills
-R, Stata, Git
-
-$$\\$$
-
-## Languages
-Japanese (Native), English (Professional working proficiency), Chinese (Limited working proficiency)
+**Computer**: R, Stata, Git  
+**Languages**: Japanese (Native), English (Professional working proficiency), Chinese (Limited working proficiency)
 
 
 

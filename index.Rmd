@@ -8,17 +8,17 @@ output:
 
 $$\\$$
 
-## Welcome to my website
+### Welcome to my website
 
 ![](./images/GPTempDownload 2.jpg){width=50%}
 
 I am currently an MS Biostatistics student at Columbia University.
 
-You can find my academic and professional experience at  [About me](about.html)
+You can find my academic and professional experience [here](about.html).
 
 $$\\$$
 
-## Contact Information
+### Contact Information
 Yuki Joyama  
 MS Biostatistics candidate  
 Columbia University Mailman School of Public Health  
