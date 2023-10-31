@@ -6,6 +6,8 @@ output:
     toc_float: false
 ---
 
+$$\\$$
+
 ## Welcome to my website
 
 ![](./images/GPTempDownload 2.jpg){width=50%}
@@ -14,7 +16,7 @@ I am currently an MS Biostatistics student at Columbia University.
 
 You can find my academic and professional experience at  [About me](about.html)
 
-
+$$\\$$
 
 ## Contact Information
 Yuki Joyama  
