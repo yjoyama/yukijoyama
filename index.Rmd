@@ -1,8 +1,13 @@
 ---
-title: "My awesome website"
+title: "Yuki Joyama"
 output: 
   html_document:
-    toc: true
-    toc_float: true
+    toc: false
+    toc_float: false
 ---
 
+## Welcome to my website
+
+I am currently an MS Biostatistics at Columbia University Mailman School of Public Health.
+
+You can find my academic and professional experience at [About me](about.html)
