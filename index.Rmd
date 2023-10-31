@@ -12,7 +12,7 @@ output:
 
 I am currently an MS Biostatistics student at Columbia University.
 
-You can find my academic and professional experience at [About me](about.html)
+You can find my academic and professional experience at  [About me](about.html)
 
 ## Contact Information
 Yuki Joyama
