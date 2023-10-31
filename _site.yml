@@ -13,4 +13,4 @@ navbar:
       href: https://www.linkedin.com/in/yuki-joyama/
 output:
   html_document:
-    theme: darkly
+    theme: flatly
