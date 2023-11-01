@@ -2,9 +2,9 @@
 title: "NYC Restaurant Inspection Results"
 output: 
   flexdashboard::flex_dashboard:
-    theme: flatly
     orientation: columns
     vertical_layout: fill
+    theme: flatly
 ---
 
 ```{r message=FALSE, echo=FALSE}
