@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
 
 
 
 <title>NYC Restaurant Inspection Results</title>
 
+<meta property="og:title" content="NYC Restaurant Inspection Results" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" href="data:image/x-icon;" type="image/x-icon">
+
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -29,9 +37,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<link href="site_libs/value-box-accent-static-0.6.2/theme-cosmo-value-box.css" rel="stylesheet" />
+<link href="site_libs/flexdashboard-css-0.6.2/flexdashboard.min.css" rel="stylesheet" />
+<link href="site_libs/flexdashboard-css-0.6.2/theme-cosmo.css" rel="stylesheet" />
 <script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
 <script src="site_libs/proj4js-2.3.15/proj4.js"></script>
 <link href="site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet" />
@@ -80,193 +89,104 @@
 <script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+/*
+  CSS for flexdashboard.js' use of Sly(). The sizing/position of this CSS needs to be
+  applied _before_ flexdashboard.js initializes, which is why this CSS has been pulled
+  out from flexdashboard.scss and inlined in the document's head.
+*/
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
+.storyboard-nav button {
+  background: transparent;
+  border: 0;
+  opacity: .3;
   outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
   padding: 0;
 }
-</style>
 
+.storyboard-nav button:hover,
+.storyboard-nav button:hover {
+  opacity: .5;
+}
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
+.storyboard-nav button:disabled,
+.storyboard-nav button:disabled {
+  opacity: .1;
 }
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
+
+.storyboard-nav .sbnext,
+.storyboard-nav .sbprev {
+  float: left;
+  width: 2%;
+  height: 120px;
 }
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
+
+.storyboard-nav .sbprev {
+  text-align: left;
+  width: 2%;
 }
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
+
+.storyboard-nav .sbnext {
   float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  text-align: right;
+  margin-right: 8px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+.storyboard-nav .sbframelist {
+  margin: 0 auto;
+  width: 94%;
+  height: 120px;
+  overflow: hidden;
+  text-shadow: none;
+  margin-bottom: 8px;
 }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
+.storyboard-nav .sbframelist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
+.storyboard-nav .sbframelist ul li {
+  float: left;
+  width: 270px;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin-right: 8px;
+  text-align: left;
+  cursor: pointer;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
+.storyboard-nav .sbframelist ul li:last-child {
+  margin-right: 0px;
 }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
+.sbframe-commentary {
+  width: 300px;
 }
 
-.tabset-dropdown > .nav-tabs > li {
+.sbframe-commentary ul {
+  padding-left: 22px;
+}
+
+.sbframe.active {
+  display: flex;
+}
+
+.sbframe:not(.active) {
   display: none;
 }
+@media only screen and (min-width: 768px) {
+html, body {
+  height: 100%;
+}
+
+#dashboard-container {
+  height: 100%;
+}
+}
 </style>
-
-<!-- code folding -->
-
 
 
 
@@ -274,130 +194,1795 @@ $(document).ready(function () {
 
 <body>
 
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
 
-<div class="container-fluid main-container">
+<span class="navbar-logo pull-left">
+  
+</span>
+<span class="navbar-brand">
+  NYC Restaurant Inspection Results
+  <span class="navbar-author">
+        </span>
+</span>
 
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Home</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="about.html">About me</a>
-</li>
-<li>
-  <a href="dashboard.html">Dashboard</a>
-</li>
-<li>
-  <a href="mailto:&lt;yj2803@cumc.columbia.edu&gt;">
-    <span class="fa fa-envelope fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="http://github.com/yjoyama/">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://www.linkedin.com/in/yuki-joyama/">
-    <span class="fa fa-brands fa-linkedin"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">NYC Restaurant Inspection Results</h1>
+<button id="navbar-button" type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
 
 </div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
+
+<img class="mobile-figure" data-mobile-figure-id=fig1 src="dashboard_files/figure-html/unnamed-chunk-2-1.mb.png" />
+<script type="text/javascript">
 
 
+var FlexDashboard = (function () {
+
+  // initialize options
+  var _options = {};
+
+  var FlexDashboard = function() {
+
+    // default options
+    _options = $.extend(_options, {
+      theme: "cosmo",
+      fillPage: false,
+      orientation: 'columns',
+      storyboard: false,
+      defaultFigWidth: 576,
+      defaultFigHeight: 461,
+      defaultFigWidthMobile: 360,
+      defaultFigHeightMobile: 461,
+      isMobile: false,
+      isPortrait: false,
+      resize_reload: true
+    });
+  };
+
+  function init(options) {
+
+    // extend default options
+    $.extend(true, _options, options);
+
+    // add ids to sections that don't have them (pandoc won't assign ids
+    // to e.g. sections with titles consisting of only chinese characters)
+    var nextId = 1;
+    $('.level1:not([id]),.level2:not([id]),.level3:not([id])').each(function() {
+      $(this).attr('id', 'dashboard-' + nextId++);
+    });
+
+    // find navbar items
+    var navbarItems = $('#flexdashboard-navbar');
+    if (navbarItems.length)
+      navbarItems = JSON.parse(navbarItems.html());
+    addNavbarItems(navbarItems);
+
+    // find the main dashboard container
+    var dashboardContainer = $('#dashboard-container');
+
+    // resolve mobile classes
+    resolveMobileClasses(dashboardContainer);
+
+    // one time global initialization for components
+    componentsInit(dashboardContainer);
+
+    // look for a global sidebar
+    var globalSidebar = dashboardContainer.find(".section.level1.sidebar");
+    if (globalSidebar.length > 0) {
+
+      // global layout for fullscreen displays
+      if (!isMobilePhone()) {
+
+         // hoist it up to the top level
+         globalSidebar.insertBefore(dashboardContainer);
+
+         // lay it out (set width/positions)
+         layoutSidebar(globalSidebar, dashboardContainer);
+
+      // tuck sidebar into first page for mobile phones
+      } else {
+
+        // convert it into a level3 section
+        globalSidebar.removeClass('sidebar');
+        globalSidebar.removeClass('level1');
+        globalSidebar.addClass('level3');
+        var h1 = globalSidebar.children('h1');
+        var h3 = $('<h3></h3>');
+        h3.append(h1.contents());
+        h3.insertBefore(h1);
+        h1.detach();
+
+        // move it into the first page
+        var page = dashboardContainer.find('.section.level1').first();
+        if (page.length > 0)
+          page.prepend(globalSidebar);
+      }
+    }
+
+    // look for pages to layout
+    var pages = $('div.section.level1');
+    if (pages.length > 0) {
+
+        // find the navbar and collapse on clicked
+        var navbar = $('#navbar');
+        navbar.on("click", "a[data-toggle!=dropdown]", null, function () {
+           navbar.collapse('hide');
+        });
+
+        // envelop the dashboard container in a tab content div
+        dashboardContainer.wrapInner('<div class="tab-content"></div>');
+
+        pages.each(function(index) {
+
+          // lay it out
+          layoutDashboardPage($(this));
+
+          // add it to the navbar
+          addToNavbar($(this), index === 0);
+
+        });
+
+    } else {
+
+      // remove the navbar and navbar button if we don't
+      // have any navbuttons
+      if (navbarItems.length === 0) {
+        $('#navbar').remove();
+        $('#navbar-button').remove();
+      }
+
+      // add the storyboard class if requested
+      if (_options.storyboard)
+        dashboardContainer.addClass('storyboard');
+
+      // layout the entire page
+      layoutDashboardPage(dashboardContainer);
+    }
+
+    // if we are in shiny we need to trigger a window resize event to
+    // force correct layout of shiny-bound-output elements
+    if (isShinyDoc())
+      $(window).trigger('resize');
+
+    // make main components visible
+    $('.section.sidebar').css('visibility', 'visible');
+    dashboardContainer.css('visibility', 'visible');
+
+    // handle location hash
+    handleLocationHash();
+
+    // intialize prism highlighting
+    initPrismHighlighting();
+
+    // record mobile and orientation state then register a handler
+    // to refresh if resize_reload is set to true and it changes
+    _options.isMobile = isMobilePhone();
+    _options.isPortrait = isPortrait();
+    if (_options.resize_reload) {
+      $(window).on('resize', function() {
+        if (_options.isMobile !== isMobilePhone() ||
+            _options.isPortrait !== isPortrait()) {
+          window.location.reload();
+        }
+      });
+    } else {
+      // if in desktop mode and resizing to mobile, make sure the heights are 100%
+      // This enforces what `fillpage.css` does for "wider" pages.
+      // Since we are not reloading once the page becomes small, we need to force the height to 100%
+      // This is a new situation introduced when `_options.resize_reload` is `false`
+      if (! _options.isMobile) {
+        // only add if `fillpage.css` was added in the first place
+        if (_options.fillPage) {
+          // fillpage.css
+          $("html,body,#dashboard").css("height", "100%");
+        }
+      }
+    }
+    // trigger layoutcomplete event
+    dashboardContainer.trigger('flexdashboard:layoutcomplete');
+  }
+
+  function resolveMobileClasses(dashboardContainer) {
+     // add top level layout class
+    dashboardContainer.addClass(isMobilePhone() ? 'mobile-layout' :
+                                                  'desktop-layout');
+
+    // look for .mobile sections and add .no-mobile to their peers
+    var mobileSections = $('.section.mobile');
+    mobileSections.each(function() {
+       var id = $(this).attr('id');
+       var nomobileId = id.replace(/-\d+$/, '');
+       $('#' + nomobileId).addClass('no-mobile');
+    });
+  }
+
+  function addNavbarItems(navbarItems) {
+
+    var navbarLeft = $('ul.navbar-left');
+    var navbarRight = $('ul.navbar-right');
+
+    for (var i = 0; i<navbarItems.length; i++) {
+
+      // get the item
+      var item = navbarItems[i];
+
+      // determine the container
+      var container = null;
+      if (item.align === "left")
+        container = navbarLeft;
+      else
+        container = navbarRight;
+
+      // navbar menu if we have multiple items
+      if (item.items) {
+        var menu = navbarMenu(null, item.icon, item.title, container);
+        for (var j = 0; j<item.items.length; j++) {
+          var subItem = item.items[j];
+          var li = $('<li></li>');
+          var a = navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target);
+          a.removeClass("nav-link").addClass("dropdown-item");
+          li.append(a);
+          menu.append(li);
+        }
+      } else {
+        var li = $('<li class="nav-item"></li>');
+        li.append(navbarLink(item.icon, item.title, item.href, item.target));
+        container.append(li);
+      }
+    }
+  }
+
+  // create or get a reference to an existing dropdown menu
+  function navbarMenu(id, icon, title, container) {
+    var existingMenu = [];
+    if (id)
+      existingMenu = container.children('#' + id);
+    if (existingMenu.length > 0) {
+      return existingMenu.children('ul');
+    } else {
+      var li = $('<li class="nav-item"></li>');
+      if (id)
+        li.attr('id', id);
+      li.addClass('dropdown');
+      // auto add "Share" title on mobile if necessary
+      if (!title && icon && (icon === "fa-share-alt") && isMobilePhone())
+        title = "Share";
+      if (title) {
+        title = title + ' <span class="caret"></span>';
+      }
+      var a = navbarLink(icon, title, "#");
+      a.addClass('dropdown-toggle');
+      a.attr('data-toggle', 'dropdown');
+      a.attr('data-bs-toggle', 'dropdown');
+      a.attr('role', 'button');
+      a.attr('aria-expanded', 'false');
+      li.append(a);
+      var ul = $('<ul class="dropdown-menu"></ul>');
+      ul.attr('role', 'menu');
+      li.append(ul);
+      container.append(li);
+      return ul;
+    }
+  }
+
+  function addToNavbar(page, active) {
+
+    // capture the id and data-icon attribute (if any)
+    var id = page.attr('id');
+    var icon = page.attr('data-icon');
+    var navmenu = page.attr('data-navmenu');
+    var navmenuIcon = page.attr('data-navmenu-icon');
+
+    // get hidden state (transfer this to navbar)
+    var hidden = page.hasClass('hidden');
+    page.removeClass('hidden');
+
+    // sanitize the id for use with bootstrap tabs
+    id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+    page.attr('id', id);
+
+    // get the wrapper
+    var wrapper = page.closest('.dashboard-page-wrapper');
+
+    // move the id to the wrapper
+    page.removeAttr('id');
+    wrapper.attr('id', id);
+
+    // add the tab-pane class to the wrapper
+    wrapper.addClass('tab-pane');
+
+    // get a reference to the h1, discover its inner contens, then detach it
+    var h1 = wrapper.find('h1').first();
+    var title = h1.contents();
+    h1.detach();
+
+    // create a navbar item
+    var li = $('<li></li>');
+    var a = navbarLink(icon, title, '#' + id);
+    a.attr('data-toggle', 'tab');
+    a.attr('data-bs-toggle', 'tab');
+    li.append(a);
+
+    // add it to the navbar (or navbar menu if specified)
+    var container = $('ul.navbar-left');
+    if (navmenu) {
+      var menuId = navmenu.replace(/\s+/g, '');
+      var menu = navbarMenu(menuId, navmenuIcon, navmenu, container);
+      li.find("> a").removeClass("nav-link").addClass("dropdown-item");
+      menu.append(li);
+    } else {
+      li.addClass("nav-item")
+      container.append(li);
+    }
+
+    // mark active tab and corresponding nav menu item
+    if (active)
+      $(a).tab("show");
+
+    // hide it if requested
+    if (hidden)
+      li.addClass('hidden');
+  }
+
+  function navbarLink(icon, title, href, target) {
+
+    var a = $('<a class="nav-link"></a>');
+    if (icon) {
+
+      // get the name of the icon set and icon
+      var dashPos = icon.indexOf("-");
+      var iconSet = null;
+      var iconSplit = icon.split(" ");
+      if (iconSplit.length > 1) {
+        iconSet = iconSplit[0];
+        icon = iconSplit.slice(1).join(" ");
+      } else {
+        iconSet = icon.substring(0, dashPos);
+      }
+      var iconName = icon.substring(dashPos + 1);
+
+      // create the icon
+      var iconElement = $('<span class="' + iconSet + ' ' + icon + '"></span>');
+      if (title)
+        iconElement.css('margin-right', '7px');
+      a.append(iconElement);
+      // if href is null see if we can auto-generate based on icon (e.g. social)
+      if (!href)
+        maybeGenerateLinkFromIcon(iconName, a);
+    }
+    if (title)
+      a.append(title);
+
+    // add the href.
+    if (href) {
+      if (href === "source_embed") {
+        a.attr('href', '#');
+        a.attr('data-featherlight', "#flexdashboard-source-code");
+        a.featherlight({
+            beforeOpen: function(event){
+              $('body').addClass('unselectable');
+            },
+            afterClose: function(event){
+              $('body').removeClass('unselectable');
+            }
+        });
+      } else {
+        a.attr('href', href);
+      }
+    }
+
+    // add the arget
+    if (target)
+      a.attr('target', target);
+
+    return a;
+  }
+
+  // auto generate a link from an icon name (e.g. twitter) when possible
+  function maybeGenerateLinkFromIcon(iconName, a) {
+
+     var serviceLinks = {
+      "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(location.href),
+      "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
+      "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
+    };
+
+    var makeSocialLink = function(a, href) {
+      a.attr('href', '#');
+      a.on('click', function(e) {
+        e.preventDefault();
+        window.open(href);
+      });
+    };
+
+    $.each(serviceLinks, function(key, value) {
+      if (iconName.indexOf(key) !== -1)
+        makeSocialLink(a, value);
+    });
+  }
+
+  // layout a dashboard page
+  function layoutDashboardPage(page) {
+
+    // use a page wrapper so that free form content above the
+    // dashboard appears at the top rather than the side (as it
+    // would without the wrapper in a column orientation)
+    var wrapper = $('<div class="dashboard-page-wrapper"></div>');
+    page.wrap(wrapper);
+
+    // if there are no level2 or level3 headers synthesize a level3
+    // header to contain the (e.g. frame it, scroll container, etc.)
+    var headers = page.find('h2,h3');
+    if (headers.length === 0)
+      page.wrapInner('<div class="section level3"></div>');
+
+    // hoist up any content before level 2 or level 3 headers
+    var children = page.children();
+    children.each(function(index) {
+      if ($(this).hasClass('level2') || $(this).hasClass('level3'))
+        return false;
+      $(this).insertBefore(page);
+    });
+
+    // determine orientation and fillPage behavior for distinct media
+    var orientation, fillPage, storyboard;
+
+    // media: mobile phone
+    if (isMobilePhone()) {
+
+      // if there is a sidebar we need to ensure it's content
+      // is properly framed as an h3
+      var sidebar = page.find('.section.sidebar');
+      sidebar.removeClass('sidebar');
+      sidebar.wrapInner('<div class="section level3"></div>');
+      var h2 = sidebar.find('h2');
+      var h3 = $('<h3></h3>');
+      h3.append(h2.contents());
+      h3.insertBefore(h2);
+      h2.detach();
+
+      // wipeout h2 elements then enclose them in a single h2
+      var level2 = page.find('div.section.level2');
+      level2.each(function() {
+        level2.children('h2').remove();
+        level2.children().unwrap();
+      });
+      page.wrapInner('<div class="section level2"></div>');
+
+      // substitute mobile images
+      if (isPortrait()) {
+        var mobileFigures = $('img.mobile-figure');
+        mobileFigures.each(function() {
+          // get the src (might be base64 encoded)
+          var src = $(this).attr('src');
+
+          // find it's peer
+          var id = $(this).attr('data-mobile-figure-id');
+          var img = $('img[data-figure-id=' + id + "]");
+          img.attr('src', src)
+             .attr('width', _options.defaultFigWidthMobile)
+             .attr('height', _options.defaultFigHeightMobile);
+        });
+      }
+
+      // hoist storyboard commentary into it's own section
+      if (page.hasClass('storyboard')) {
+        var commentaryHR = page.find('div.section.level3 hr');
+        commentaryHR.each(function() {
+          var commentary = $(this).nextAll().detach();
+          var commentarySection = $('<div class="section level3"></div>');
+          commentarySection.append(commentary);
+          commentarySection.insertAfter($(this).closest('div.section.level3'));
+          $(this).remove();
+        });
+      }
+
+      // force a non full screen layout by columns
+      orientation = _options.orientation = 'columns';
+      fillPage = _options.fillPage = false;
+      storyboard = _options.storyboard = false;
+
+    // media: desktop
+    } else {
+
+      // determine orientation
+      orientation = page.attr('data-orientation');
+      if (orientation !== 'rows' && orientation != 'columns')
+        orientation = _options.orientation;
+
+      // determine storyboard mode
+      storyboard = page.hasClass('storyboard');
+
+      // fillPage based on options (force for storyboard)
+      fillPage = _options.fillPage || storyboard;
+
+      // handle sidebar
+      var sidebar = page.find('.section.level2.sidebar');
+      if (sidebar.length > 0)
+        layoutSidebar(sidebar, page);
+    }
+
+    // give it and it's parent divs height: 100% if we are in fillPage mode
+    if (fillPage) {
+      page.addClass('vertical-layout-fill');
+      page.css('height', '100%');
+      page.parents('div').css('height', '100%');
+    } else {
+      page.addClass('vertical-layout-scroll');
+    }
+
+    // perform the layout
+    if (storyboard)
+      layoutPageAsStoryboard(page);
+    else if (orientation === 'rows')
+      layoutPageByRows(page, fillPage);
+    else if (orientation === 'columns')
+      layoutPageByColumns(page, fillPage);
+  }
+
+  function layoutSidebar(sidebar, content) {
+
+    // get it out of the header hierarchy
+    sidebar = sidebar.first();
+    if (sidebar.hasClass('level1')) {
+      sidebar.removeClass('level1');
+      sidebar.children('h1').remove();
+    } else if (sidebar.hasClass('level2')) {
+      sidebar.removeClass('level2');
+      sidebar.children('h2').remove();
+    }
+
+    // determine width
+    var sidebarWidth = isTablet() ? 220 : 250;
+    var dataWidth = parseInt(sidebar.attr('data-width'));
+    if (dataWidth)
+      sidebarWidth = dataWidth;
+
+    // set the width and shift the page right to accomodate the sidebar
+    sidebar.css('width', sidebarWidth + 'px');
+    content.css('padding-left', sidebarWidth + 'px');
+
+    // wrap it's contents in a form
+    sidebar.wrapInner($('<form></form>'));
+  }
+
+  function layoutPageAsStoryboard(page) {
+
+    // create storyboard navigation
+    var nav = $('<div class="storyboard-nav"></div>');
+
+    // add navigation buttons
+    var prev = $('<button class="sbprev"><i class="fa fa-angle-left"></i></button>');
+    nav.append(prev);
+    var next= $('<button class="sbnext"><i class="fa fa-angle-right"></i></button>');
+    nav.append(next);
+
+    // add navigation frame
+    var frameList = $('<div class="sbframelist"></div>');
+    nav.append(frameList);
+    var ul = $('<ul></ul>');
+    frameList.append(ul);
+
+     // find all the level3 sections (those are the storyboard frames)
+    var frames = page.find('div.section.level3');
+    frames.each(function() {
+
+      // mark it
+      $(this).addClass('sbframe');
+
+      // divide it into chart content and (optional) commentary
+      $(this).addClass('dashboard-column-orientation');
+
+      // stuff the chart into it's own div w/ flex
+      $(this).wrapInner('<div class="sbframe-component"></div>');
+      setFlex($(this), 1);
+      var frame = $(this).children('.sbframe-component');
+
+      // extract the title from the h3
+      var li = $('<li></li>');
+      var h3 = frame.children('h3');
+      li.append(h3.contents());
+      h3.detach();
+      ul.append(li);
+
+      // extract commentary
+      var hr = frame.children('hr');
+      if (hr.length) {
+        var commentary = hr.nextAll().detach();
+        hr.remove();
+        var commentaryFrame = $('<div class="sbframe-commentary"></div>');
+        commentaryFrame.addClass('flowing-content-shim');
+        commentaryFrame.addClass('flowing-content-container');
+        commentaryFrame.append(commentary);
+        $(this).append(commentaryFrame);
+
+        // look for a data-commentary-width attribute
+        var commentaryWidth = $(this).attr('data-commentary-width');
+        if (commentaryWidth)
+          commentaryFrame.css('width', commentaryWidth + 'px');
+      }
+
+      // layout the chart (force flex)
+      var result = layoutChart(frame, true);
+
+      // ice the notes if there are none
+      if (!result.notes)
+        frame.find('.chart-notes').remove();
+
+      // set flex on chart
+      setFlex(frame, 1);
+    });
+
+    // create a div to hold all the frames
+    var frameContent = $('<div class="sbframe-content"></div>');
+    frameContent.addClass('dashboard-row-orientation');
+    frameContent.append(frames.detach());
+
+    // row orientation to stack nav and frame content
+    page.addClass('dashboard-row-orientation');
+    page.append(nav);
+    page.append(frameContent);
+    setFlex(frameContent, 1);
+
+    // initialize sly
+    var sly = new Sly(frameList, {
+    		horizontal: true,
+    		itemNav: 'basic',
+    		smart: true,
+    		activateOn: 'click',
+    		startAt: 0,
+    		scrollBy: 1,
+    		activatePageOn: 'click',
+    		speed: 200,
+    		moveBy: 600,
+    		dragHandle: true,
+    		dynamicHandle: true,
+    		clickBar: true,
+    		keyboardNavBy: 'items',
+    		next: next,
+    		prev: prev
+    	}).init();
+
+    // make first frame active
+    frames.removeClass('active');
+    frames.first().addClass('active');
+
+    // subscribe to frame changed events
+    sly.on('active', function (eventName, itemIndex) {
+      frames.removeClass('active');
+      frames.eq(itemIndex).addClass('active')
+                          .trigger('shown');
+    });
+  }
+
+  function layoutPageByRows(page, fillPage) {
+
+    // row orientation
+    page.addClass('dashboard-row-orientation');
+
+    // find all the level2 sections (those are the rows)
+    var rows = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (rows.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      rows = page.find('div.section.level2');
+    }
+
+    rows.each(function () {
+
+      // flags
+      var haveNotes = false;
+      var haveFlexHeight = true;
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // give it row layout semantics if it's not a tabset
+      if (!isTabset)
+        $(this).addClass('dashboard-row');
+
+      // find all of the level 3 subheads
+      var columns = $(this).find('div.section.level3');
+
+      // determine figureSizes sizes
+      var figureSizes = chartFigureSizes(columns);
+
+      // fixup the columns
+      columns.each(function(index) {
+
+        // layout the chart (force flex if we are in a tabset)
+        var result = layoutChart($(this), isTabset);
+
+        // update flexHeight state
+        if (!result.flex)
+          haveFlexHeight = false;
+
+        // update state
+        if (result.notes)
+          haveNotes = true;
+
+        // set the column flex based on the figure width
+        // (value boxes will just get the default figure width)
+        var chartWidth = figureSizes[index].width;
+        setFlex($(this), chartWidth + ' ' + chartWidth + ' 0px');
+
+      });
+
+      // remove empty chart note divs
+      if (isTabset)
+        $(this).find('.chart-notes').filter(function() {
+            return $(this).html() === "&nbsp;";
+        }).remove();
+      if (!haveNotes)
+        $(this).find('.chart-notes').remove();
+
+       // make it a flexbox row
+      if (haveFlexHeight)
+        $(this).addClass('dashboard-row-flex');
+
+      // now we can set the height on all the wrappers (based on maximum
+      // figure height + room for title and notes, or data-height on the
+      // container if specified). However, don't do this if there is
+      // no flex on any of the constituent columns
+      var flexHeight = null;
+      var dataHeight = parseInt($(this).attr('data-height'));
+      if (dataHeight)
+        flexHeight = adjustedHeight(dataHeight, columns.first());
+      else if (haveFlexHeight)
+        flexHeight = maxChartHeight(figureSizes, columns);
+      if (flexHeight) {
+        if (fillPage)
+          setFlex($(this), flexHeight + ' ' + flexHeight + ' 0px');
+        else {
+          $(this).css('height', flexHeight + 'px');
+          setFlex($(this), '0 0 ' + flexHeight + 'px');
+        }
+      }
+
+    });
+  }
+
+  function layoutPageByColumns(page, fillPage) {
+
+    // column orientation
+    page.addClass('dashboard-column-orientation');
+
+    // find all the level2 sections (those are the columns)
+    var columns = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (columns.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      columns = page.find('div.section.level2');
+    }
+
+    // layout each column
+    columns.each(function (index) {
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // make it a flexbox column
+      $(this).addClass('dashboard-column');
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // find all the h3 elements
+      var rows = $(this).find('div.section.level3');
+
+      // get the figure sizes for the rows
+      var figureSizes = chartFigureSizes(rows);
+
+      // column flex is the max row width (or data-width if specified)
+      var flexWidth;
+      var dataWidth = parseInt($(this).attr('data-width'));
+      if (dataWidth)
+        flexWidth = dataWidth;
+      else
+        flexWidth = maxChartWidth(figureSizes);
+      setFlex($(this), flexWidth + ' ' + flexWidth + ' 0px');
+
+      // layout each chart
+      rows.each(function(index) {
+
+        // perform the layout
+        var result = layoutChart($(this), false);
+
+        // ice the notes if there are none
+        if (!result.notes)
+          $(this).find('.chart-notes').remove();
+
+        // set flex height based on figHeight, then adjust
+        if (result.flex) {
+          var chartHeight = figureSizes[index].height;
+          chartHeight = adjustedHeight(chartHeight, $(this));
+          if (fillPage)
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' 0px');
+          else {
+            $(this).css('height', chartHeight + 'px');
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' ' + chartHeight + 'px');
+          }
+        }
+      });
+    });
+  }
+
+  function chartFigureSizes(charts) {
+
+    // sizes
+    var figureSizes = new Array(charts.length);
+
+    // check each chart
+    charts.each(function(index) {
+
+      // start with default
+      figureSizes[index] = {
+        width: _options.defaultFigWidth,
+        height: _options.defaultFigHeight
+      };
+
+      // look for data-height or data-width then knit options
+      var dataWidth = parseInt($(this).attr('data-width'));
+      var dataHeight = parseInt($(this).attr('data-height'));
+      var knitrOptions = $(this).find('.knitr-options:first');
+      var knitrWidth, knitrHeight;
+      if (knitrOptions) {
+        knitrWidth = parseInt(knitrOptions.attr('data-fig-width'));
+        knitrHeight =  parseInt(knitrOptions.attr('data-fig-height'));
+      }
+
+      // width
+      if (dataWidth)
+        figureSizes[index].width = dataWidth;
+      else if (knitrWidth)
+        figureSizes[index].width = knitrWidth;
+
+      // height
+      if (dataHeight)
+        figureSizes[index].height = dataHeight;
+      else if (knitrHeight)
+        figureSizes[index].height = knitrHeight;
+    });
+
+    // return sizes
+    return figureSizes;
+  }
+
+  function maxChartHeight(figureSizes, charts) {
+
+    // first compute the maximum height
+    var maxHeight = _options.defaultFigHeight;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].height > maxHeight)
+        maxHeight = figureSizes[i].height;
+
+    // now add offests for chart title and chart notes
+    if (charts.length)
+      maxHeight = adjustedHeight(maxHeight, charts.first());
+
+    return maxHeight;
+  }
+
+  function adjustedHeight(height, chart) {
+    if (chart.length > 0) {
+      var chartTitle = chart.find('.chart-title');
+      if (chartTitle.length)
+        height += chartTitle.first().outerHeight();
+      var chartNotes = chart.find('.chart-notes');
+      if (chartNotes.length)
+        height += chartNotes.first().outerHeight();
+    }
+    return height;
+  }
+
+  function maxChartWidth(figureSizes) {
+    var maxWidth = _options.defaultFigWidth;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].width > maxWidth)
+        maxWidth = figureSizes[i].width;
+    return maxWidth;
+  }
+
+  // layout a chart
+  function layoutChart(chart, forceFlex) {
+
+    // state to return
+    var result = {
+      notes: false,
+      flex: false
+    };
+
+    // extract the title
+    var title = extractTitle(chart);
+
+    // find components that apply to this container
+    var components = componentsFind(chart);
+
+    // if it's a custom component then call it and return
+    var customComponents = componentsCustom(components);
+    if (customComponents.length) {
+      componentsLayout(customComponents, title, chart);
+      result.notes = false;
+      result.flex = forceFlex || componentsFlex(customComponents);
+      return result;
+    }
+
+    // put all the content in a chart wrapper div
+    chart.addClass('chart-wrapper');
+    chart.wrapInner('<div class="chart-stage"></div>');
+    var chartContent = chart.children('.chart-stage');
+
+    // flex the content if appropriate
+    result.flex = forceFlex || componentsFlex(components);
+    if (result.flex) {
+      // add flex classes
+      chart.addClass('chart-wrapper-flex');
+      chartContent.addClass('chart-stage-flex');
+
+      // additional shim to break out of flexbox sizing
+      chartContent.wrapInner('<div class="chart-shim"></div>');
+      chartContent = chartContent.children('.chart-shim');
+    }
+
+    // set custom data-padding attribute
+    var pad = chart.attr('data-padding');
+    if (pad) {
+      if (pad === "0")
+        chart.addClass('no-padding');
+      else {
+        pad = pad + 'px';
+        chartContent.css('left', pad)
+                    .css('top', pad)
+                    .css('right', pad)
+                    .css('bottom', pad)
+      }
+    }
+
+    // call compoents
+    componentsLayout(components, title, chartContent);
+
+    // also activate components on shiny output
+    findShinyOutput(chartContent).on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+
+          // see if we opted out of flex based on our output (for shiny
+          // we can't tell what type of output we have until after the
+          // value is bound)
+          var components = componentsFind(element);
+          var flex = forceFlex || componentsFlex(components);
+          if (!flex) {
+            chart.css('height', "");
+            setFlex(chart, "");
+            chart.removeClass('chart-wrapper-flex');
+            chartContent.removeClass('chart-stage-flex');
+            chartContent.children().unwrap();
+          }
+
+          // perform layout
+          componentsLayout(components, title, element.parent());
+        }, 10);
+      });
+
+    // add the title
+    var chartTitle = $('<div class="chart-title"></div>');
+    chartTitle.append(title);
+    chart.prepend(chartTitle);
+
+    // add the notes section
+    var chartNotes = $('<div class="chart-notes"></div>');
+    chartNotes.html('&nbsp;');
+    chart.append(chartNotes);
+
+    // attempt to extract notes if we have a component
+    if (components.length)
+      result.notes = extractChartNotes(chartContent, chartNotes);
+
+    // return result
+    return result;
+  }
+
+  // build a tabset from a section div with the .tabset class
+  function layoutTabset(tabset) {
+
+    // check for fade option
+    var fade = tabset.hasClass("tabset-fade");
+    var pills = tabset.hasClass("tabset-pills");
+    var navClass = pills ? "nav-pills" : "nav-tabs";
+
+    // determine the heading level of the tabset and tabs
+    var match = tabset.attr('class').match(/level(\d) /);
+    if (match === null)
+      return;
+    var tabsetLevel = Number(match[1]);
+    var tabLevel = tabsetLevel + 1;
+
+    // find all subheadings immediately below
+    var tabs = tabset.find("div.section.level" + tabLevel);
+    if (!tabs.length)
+      return;
+
+    // create tablist and tab-content elements
+    var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+    $(tabs[0]).before(tabList);
+    var tabContent = $('<div class="tab-content"></div>');
+    $(tabs[0]).before(tabContent);
+
+    // build the tabset
+    var activeTab = 0;
+    tabs.each(function(i) {
+
+      // get the tab div
+      var tab = $(tabs[i]);
+
+      // get the id then sanitize it for use with bootstrap tabs
+      var id = tab.attr('id');
+
+      // see if this is marked as the active tab
+      if (tab.hasClass('active'))
+        activeTab = i;
+
+      // sanitize the id for use with bootstrap tabs
+      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+      tab.attr('id', id);
+
+      // get the heading element within it and grab it's text
+      var heading = tab.find('h' + tabLevel + ':first');
+      var headingDom = heading.contents();
+
+      // build and append the tab list item
+      var a = $('<a role="tab" data-toggle="tab" data-bs-toggle="tab" class="nav-link"></a>');
+      a.append(headingDom);
+      a.attr('href', '#' + id);
+      a.attr('aria-controls', id);
+      var li = $('<li role="presentation" class="nav-item"></li>');
+      li.append(a);
+      tabList.append(li);
+
+      // set it's attributes
+      tab.attr('role', 'tabpanel');
+      tab.addClass('tab-pane');
+      tab.addClass('tabbed-pane');
+      tab.addClass('no-title');
+      if (fade)
+        tab.addClass('fade');
+
+      // move it into the tab content div
+      tab.detach().appendTo(tabContent);
+    });
+
+    // set active tab
+    $(tabList.children()[activeTab]).tab("show");
+    var active = $(tabContent.children('div.section')[activeTab]);
+    active.addClass('active');
+    if (fade)
+      active.addClass('in');
+
+    // add nav-tabs-custom
+    tabset.addClass('nav-tabs-custom');
+
+    // internal layout is dashboard-column with tab-content flexing
+    tabset.addClass('dashboard-column');
+    setFlex(tabContent, 1);
+  }
+
+  // one time global initialization for components
+  function componentsInit(dashboardContainer) {
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.init)
+        component.init(dashboardContainer);
+    }
+  }
+
+  // find components that apply within a container
+  function componentsFind(container) {
+
+    // look for components
+    var components = [];
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.find(container).length)
+        components.push(component);
+    }
+
+    // if there were none then use a special flowing content component
+    // that just adds a scrollbar in fillPage mode
+    if (components.length == 0) {
+      components.push({
+        find: function(container) {
+          return container;
+        },
+
+        flex: function(fillPage) {
+          return fillPage;
+        },
+
+        layout: function(title, container, element, fillPage) {
+          if (fillPage) {
+            container.addClass('flowing-content-shim');
+            container.addClass('flowing-content-container');
+          }
+        }
+      });
+    }
+
+    return components;
+  }
+
+  // if there is a custom component then pick it out
+  function componentsCustom(components) {
+    var customComponent = [];
+    for (var i=0; i<components.length; i++)
+      if (components[i].type === "custom") {
+        customComponent.push(components[i]);
+        break;
+      }
+    return customComponent;
+  }
+
+  // query all components for flex
+  function componentsFlex(components) {
+
+    // no components at all means no flex
+    if (components.length === 0)
+      return false;
+
+    // otherwise query components (assume true unless we see false)
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++)
+      if (components[i].flex && !components[i].flex(_options.fillPage))
+        return false;
+    return true;
+  }
+
+  // layout all components
+  function componentsLayout(components, title, container) {
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++) {
+      var element = components[i].find(container);
+      if (components[i].layout) {
+        // call layout (don't call other components if it returns false)
+        var result = components[i].layout(title, container, element, _options.fillPage);
+        if (result === false)
+          return;
+      }
+    }
+  }
+
+  // get a reference to the h3, discover it's inner html, and remove it
+  function extractTitle(container) {
+    var h3 = container.children('h3').first();
+    var title = '';
+    if (!container.hasClass('no-title'))
+      title = h3.contents();
+    h3.detach();
+    return title;
+  }
+
+  // extract chart notes
+  function extractChartNotes(chartContent, chartNotes) {
+    // look for a terminating blockquote or image caption
+    var blockquote = chartContent.children('blockquote:last-child');
+    var caption = chartContent.children('div.image-container')
+                              .children('p.caption');
+    if (blockquote.length) {
+      chartNotes.empty().append(blockquote.children('p:first-child').contents());
+      blockquote.remove();
+      return true;
+    } else if (caption.length) {
+      chartNotes.empty().append(caption.contents());
+      caption.remove();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function findShinyOutput(chartContent) {
+    return chartContent.find('.shiny-text-output, .shiny-html-output');
+  }
+
+  // safely detect rendering on a mobile phone
+  function isMobilePhone() {
+    try
+    {
+      return ! window.matchMedia("only screen and (min-width: 768px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  function isFillPage() {
+    return _options.fillPage;
+  }
+
+  // detect portrait mode
+  function isPortrait() {
+    return ($(window).width() < $(window).height());
+  }
+
+  // safely detect rendering on a tablet
+  function isTablet() {
+    try
+    {
+      return window.matchMedia("only screen and (min-width: 769px) and (max-width: 992px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  // test whether this is a shiny doc
+  function isShinyDoc() {
+    return (typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings);
+  }
+
+  // set flex using vendor specific prefixes
+  function setFlex(el, flex) {
+    el.css('-webkit-box-flex', flex)
+      .css('-webkit-flex', flex)
+      .css('-ms-flex', flex)
+      .css('flex', flex);
+  }
+
+  // support bookmarking of pages
+  function handleLocationHash() {
+
+    // restore tab/page from bookmark
+    var hash = window.decodeURIComponent(window.location.hash);
+    if (hash.length > 0) {
+      // Update the tab without .showPage() so that we don't change page history
+      $('ul.nav a[href="' + hash + '"]').tab('show');
+    }
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+      var hash = window.decodeURIComponent(window.location.hash);
+      var activeTab = $('ul.nav a[href="' + hash + '"]');
+      if (activeTab.length) {
+        activeTab.tab('show');
+      } else {
+        // returning to the base page URL without a hash activates first tab
+        $('ul.nav a:first').tab('show');
+      }
+    });
+
+    // add a hash to the URL when the user clicks on a tab/page
+    $('.navbar-nav a[data-toggle="tab"]').on('click', function(e) {
+      var baseUrl = FlexDashboardUtils.urlWithoutHash(window.location.href);
+      var hash = FlexDashboardUtils.urlHash($(this).attr('href'));
+      var href = baseUrl + hash;
+      FlexDashboardUtils.setLocation(href);
+    });
+
+    // handle clicks of other links that should activate pages
+    var navPages = $('ul.navbar-nav li a[data-toggle=tab]');
+    navPages.each(function() {
+      var href =  $(this).attr('href');
+      var links = $('a[href="' + href + '"][data-toggle!=tab]');
+      links.each(function() {
+        $(this).on('click', function(e) {
+          window.FlexDashboardUtils.showPage(href);
+        });
+      });
+    });
+  }
+
+  // tweak Prism highlighting
+  function initPrismHighlighting() {
+
+    if (window.Prism) {
+      Prism.languages.insertBefore('r', 'comment', {
+        'heading': [
+          {
+            // title 1
+        	  // =======
+
+        	  // title 2
+        	  // -------
+        	  pattern: /\w+.*(?:\r?\n|\r)(?:====+|----+)/,
+            alias: 'operator'
+          },
+          {
+            // ### title 3
+            pattern: /(^\s*)###[^#].+/m,
+            lookbehind: true,
+            alias: 'operator'
+          }
+        ]
+      });
+
+      // prism highlight
+      Prism.highlightAll();
+    }
+  }
+
+  FlexDashboard.prototype = {
+    constructor: FlexDashboard,
+    init: init,
+    isMobilePhone: isMobilePhone,
+    isFillPage: isFillPage
+  };
+
+  return FlexDashboard;
+
+})();
+
+// utils
+window.FlexDashboardUtils = {
+  resizableImage: function(img) {
+    var src = img.attr('src');
+    var url = 'url("' + src + '")';
+    img.parent().css('background', url)
+                .css('background-size', 'contain')
+                .css('background-repeat', 'no-repeat')
+                .css('background-position', 'center')
+                .addClass('image-container');
+  },
+  setLocation: function(href) {
+    if (history && history.pushState) {
+      history.pushState(null, null, href);
+    } else {
+      window.location.replace(href);
+    }
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10);
+  },
+  showPage: function(href) {
+    $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
+    var baseUrl = this.urlWithoutHash(window.location.href);
+    var loc = baseUrl + href;
+    this.setLocation(loc);
+  },
+  showLinkedValue: function(href) {
+    // check for a page link
+    if ($('ul.navbar-nav li a[data-toggle=tab][href="' + href + '"]').length > 0)
+      this.showPage(href);
+    else
+      window.open(href);
+  },
+  urlWithoutHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(0, hashLoc);
+    else
+      return url;
+  },
+  urlHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(hashLoc);
+    else
+      return "";
+  }
+};
+
+window.FlexDashboard = new FlexDashboard();
+
+// empty content
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    if (container.find('p').length == 0)
+      return container;
+    else
+      return $();
+  }
+})
+
+// plot image
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('p')
+                    .children('img:only-child');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// plot image (figure style)
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.figure').children('img');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// htmlwidget
+window.FlexDashboardComponents.push({
+
+  init: function(dashboardContainer) {
+    // trigger "shown" after initial layout to force static htmlwidgets
+    // in runtime: shiny to be resized after the dom has been transformed
+    dashboardContainer.on('flexdashboard:layoutcomplete', function(event) {
+      setTimeout(function() {
+        dashboardContainer.trigger('shown');
+      }, 200);
+    });
+  },
+
+  find: function(container) {
+    return container.children('div[id^="htmlwidget-"],div.html-widget');
+  }
+});
+
+// gauge
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.html-widget.gauge');
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+
+  }
+
+});
+
+// shiny output
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.children('div[class^="shiny-"]');
+  }
+});
+
+// bootstrap table
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    var bsTable = container.find('table.table');
+    if (bsTable.length !== 0)
+      return bsTable;
+    else
+      return container.find('tr.header').parent('thead').parent('table');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var bsTable = element;
+
+    // fixup xtable generated tables with a proper thead
+    var headerRow = bsTable.find('tbody > tr:first-child > th').parent();
+    if (headerRow.length > 0) {
+      var thead = $('<thead></thead>');
+      bsTable.prepend(thead);
+      headerRow.detach().appendTo(thead);
+    }
+
+    // improve appearance
+    container.addClass('bootstrap-table');
+
+    // for fill page provide scrolling w/ sticky headers
+    if (fillPage) {
+      // force scrollbar on overflow
+      container.addClass('flowing-content-shim');
+
+      // stable table headers when scrolling
+      bsTable.stickyTableHeaders({
+        scrollableArea: container
+      });
+    }
+  }
+});
+
+// embedded shiny app
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('iframe.shiny-frame');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage) {
+      element.attr('height', '100%');
+    } else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (!height)
+        height = element.attr('height');
+      if (!height)
+        element.attr('height', 500);
+    }
+  }
+});
+
+// shiny fillRow or fillCol
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('.flexfill-container');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage)
+      element.css('height', '100%');
+    else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (height === "100%" || height === "auto" || height === "initial" ||
+          height === "inherit" || !height) {
+        element.css('height', 500);
+      }
+    }
+  }
+});
+
+// valueBox
+window.FlexDashboardComponents.push({
+
+  type: "custom",
+
+  find: function(container) {
+    if (container.find('span.value-output, .shiny-valuebox-output').length)
+      return container;
+    else
+      return $();
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var chartTitle = title;
+    var valueBox = element;
+
+    // add value-box class to container
+    container.addClass('value-box');
+
+    // value paragraph
+    var value = $('<p class="value"></p>');
+
+    // if we have shiny-text-output then just move it in
+    var valueOutputSpan = [];
+    var shinyOutput = valueBox.find('.shiny-valuebox-output').detach();
+    if (shinyOutput.length) {
+      valueBox.children().remove();
+      shinyOutput.html("&mdash;");
+      value.append(shinyOutput);
+    } else {
+      // extract the value (remove leading vector index)
+      var chartValue = valueBox.text().trim();
+      chartValue = chartValue.replace("[1] ", "");
+      valueOutputSpan = valueBox.find('span.value-output').detach();
+      valueBox.children().remove();
+      value.text(chartValue);
+    }
+
+    // caption
+    var caption = $('<p class="caption"></p>');
+    caption.append(chartTitle);
+
+    // build inner div for value box and add it
+    var inner = $('<div class="inner"></div>');
+    inner.append(value);
+    inner.append(caption);
+    valueBox.append(inner);
+
+    // add icon if specified
+    var icon = $('<div class="icon"><i></i></div>');
+    valueBox.append(icon);
+    function setIcon(chartIcon) {
+      var iconLib = "";
+      var iconSplit = chartIcon.split(" ");
+      if (iconSplit.length > 1) {
+        iconLib = iconSplit[0];
+        chartIcon = iconSplit.slice(1).join(" ");
+      } else {
+        var components = chartIcon.split("-");
+        if (components.length > 1)
+          iconLib = components[0];
+      }
+      icon.children('i').attr('class', iconLib + ' ' + chartIcon);
+    }
+    var chartIcon = valueBox.attr('data-icon');
+    if (chartIcon)
+      setIcon(chartIcon);
+
+    // handle data attributes in valueOutputSpan
+    function handleValueOutput(valueOutput) {
+
+      // caption
+      var dataCaption = valueOutput.attr('data-caption');
+      if (dataCaption)
+        caption.html(dataCaption);
+
+      // icon
+      var dataIcon = valueOutput.attr('data-icon');
+      if (dataIcon)
+        setIcon(dataIcon);
+
+      // If valueBox(color=) was an accent color, this attr should
+      // be populated with the accent color and the relevant CSS comes
+      // in through HTML dependencies
+      var dataColorAccent = valueOutput.attr('data-color-accent');
+      var valueBoxClasses = "value-box-" + (["primary", "info", "danger", "warning", "success"].join(" value-box-"));
+      if (dataColorAccent) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.addClass('value-box-' + dataColorAccent);
+      }
+
+      // If valueBox(color=) was a CSS color, these other data-color-*
+      // attrs will be populated
+      var dataColor = valueOutput.attr('data-color');
+      if (dataColor) {
+        valueBox.removeClass(valueBoxClasses);
+        valueBox.css('background-color', dataColor);
+      }
+      var dataColorText = valueOutput.attr('data-color-text');
+      if (dataColorText) {
+        valueBox.find(".inner").css('color', dataColorText);
+      }
+      var dataColorIcon = valueOutput.attr('data-color-icon');
+      if (dataColorIcon) {
+        valueBox.find(".icon").css('color', dataColorIcon);
+      }
+
+      // url
+      var dataHref = valueOutput.attr('data-href');
+      if (dataHref) {
+        valueBox.addClass('linked-value');
+        valueBox.off('click.value-box');
+        valueBox.on('click.value-box', function(e) {
+          window.FlexDashboardUtils.showLinkedValue(dataHref);
+        });
+      }
+    }
+
+    // check for a valueOutputSpan
+    if (valueOutputSpan.length > 0) {
+      handleValueOutput(valueOutputSpan);
+    }
+
+    // if we have a shinyOutput then bind a listener to handle
+    // new valueOutputSpan values
+    shinyOutput.on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+          var valueOutputSpan = element.find('span.value-output');
+          if (valueOutputSpan.length > 0)
+            handleValueOutput(valueOutputSpan);
+        }, 10);
+      }
+    );
+  }
+});
+</script>
+
+<div id="dashboard-container">
+
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
 <div id="section" class="section level2" data-width="650">
 <h2></h2>
 <div id="common-cuisine-type-in-nyc" class="section level3">
 <h3>Common cuisine type in NYC</h3>
-<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5b2b70e1bf9e40dccbf7" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-5b2b70e1bf9e40dccbf7">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[{"name":"Afghan","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"afghan"},{"name":"African","value":36,"valuecolor":36,"level":1,"color":"#FFFFBF","id":"african"},{"name":"American","value":2347,"valuecolor":2347,"level":1,"color":"#006837","id":"american"},{"name":"Armenian","value":11,"valuecolor":11,"level":1,"color":"#FFFFBF","id":"armenian"},{"name":"Asian","value":140,"valuecolor":140,"level":1,"color":"#F7FBB4","id":"asian"},{"name":"Australian","value":3,"valuecolor":3,"level":1,"color":"#FFFFBF","id":"australian"},{"name":"Bagels/Pretzels","value":72,"valuecolor":72,"level":1,"color":"#FBFDB9","id":"bagels_pretzels"},{"name":"Bakery","value":289,"valuecolor":289,"level":1,"color":"#E8F59F","id":"bakery"},{"name":"Bangladeshi","value":22,"valuecolor":22,"level":1,"color":"#FFFFBF","id":"bangladeshi"},{"name":"Barbecue","value":16,"valuecolor":16,"level":1,"color":"#FFFFBF","id":"barbecue"},{"name":"Bottled beverages, including water, sodas, juices, etc.","value":26,"valuecolor":26,"level":1,"color":"#FFFFBF","id":"bottled_beverages,_including_water,_sodas,_juices,_etc."},{"name":"Brazilian","value":10,"valuecolor":10,"level":1,"color":"#FFFFBF","id":"brazilian"},{"name":"CafÃ©/Coffee/Tea","value":429,"valuecolor":429,"level":1,"color":"#DCF090","id":"cafã©_coffee_tea"},{"name":"Cajun","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"cajun"},{"name":"Caribbean","value":277,"valuecolor":277,"level":1,"color":"#ECF7A4","id":"caribbean"},{"name":"Chicken","value":193,"valuecolor":193,"level":1,"color":"#EFF8AA","id":"chicken"},{"name":"Chilean","value":3,"valuecolor":3,"level":1,"color":"#FFFFBF","id":"chilean"},{"name":"Chinese","value":1058,"valuecolor":1058,"level":1,"color":"#99D368","id":"chinese"},{"name":"Chinese/Cuban","value":8,"valuecolor":8,"level":1,"color":"#FFFFBF","id":"chinese_cuban"},{"name":"Chinese/Japanese","value":22,"valuecolor":22,"level":1,"color":"#FFFFBF","id":"chinese_japanese"},{"name":"Continental","value":16,"valuecolor":16,"level":1,"color":"#FFFFBF","id":"continental"},{"name":"Creole","value":14,"valuecolor":14,"level":1,"color":"#FFFFBF","id":"creole"},{"name":"Creole/Cajun","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"creole_cajun"},{"name":"Czech","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"czech"},{"name":"Delicatessen","value":129,"valuecolor":129,"level":1,"color":"#F7FBB4","id":"delicatessen"},{"name":"Donuts","value":198,"valuecolor":198,"level":1,"color":"#EFF8AA","id":"donuts"},{"name":"Eastern European","value":37,"valuecolor":37,"level":1,"color":"#FFFFBF","id":"eastern_european"},{"name":"Egyptian","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"egyptian"},{"name":"English","value":6,"valuecolor":6,"level":1,"color":"#FFFFBF","id":"english"},{"name":"Ethiopian","value":5,"valuecolor":5,"level":1,"color":"#FFFFBF","id":"ethiopian"},{"name":"Filipino","value":12,"valuecolor":12,"level":1,"color":"#FFFFBF","id":"filipino"},{"name":"French","value":143,"valuecolor":143,"level":1,"color":"#F3FAAF","id":"french"},{"name":"Fruits/Vegetables","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"fruits_vegetables"},{"name":"German","value":17,"valuecolor":17,"level":1,"color":"#FFFFBF","id":"german"},{"name":"Greek","value":59,"valuecolor":59,"level":1,"color":"#FBFDB9","id":"greek"},{"name":"Hamburgers","value":175,"valuecolor":175,"level":1,"color":"#F3FAAF","id":"hamburgers"},{"name":"Hawaiian","value":5,"valuecolor":5,"level":1,"color":"#FFFFBF","id":"hawaiian"},{"name":"Hotdogs","value":10,"valuecolor":10,"level":1,"color":"#FFFFBF","id":"hotdogs"},{"name":"Hotdogs/Pretzels","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"hotdogs_pretzels"},{"name":"Ice Cream, Gelato, Yogurt, Ices","value":92,"valuecolor":92,"level":1,"color":"#FBFDB9","id":"ice_cream,_gelato,_yogurt,_ices"},{"name":"Indian","value":122,"valuecolor":122,"level":1,"color":"#F7FBB4","id":"indian"},{"name":"Indonesian","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"indonesian"},{"name":"Iranian","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"iranian"},{"name":"Irish","value":77,"valuecolor":77,"level":1,"color":"#FBFDB9","id":"irish"},{"name":"Italian","value":455,"valuecolor":455,"level":1,"color":"#DCF090","id":"italian"},{"name":"Japanese","value":338,"valuecolor":338,"level":1,"color":"#E4F39A","id":"japanese"},{"name":"Jewish/Kosher","value":117,"valuecolor":117,"level":1,"color":"#F7FBB4","id":"jewish_kosher"},{"name":"Juice, Smoothies, Fruit Salads","value":76,"valuecolor":76,"level":1,"color":"#FBFDB9","id":"juice,_smoothies,_fruit_salads"},{"name":"Korean","value":108,"valuecolor":108,"level":1,"color":"#F7FBB4","id":"korean"},{"name":"Latin (Cuban, Dominican, Puerto Rican, South & Central American)","value":418,"valuecolor":418,"level":1,"color":"#E0F295","id":"latin_(cuban,_dominican,_puerto_rican,_south_&_central_american)"},{"name":"Mediterranean","value":84,"valuecolor":84,"level":1,"color":"#FBFDB9","id":"mediterranean"},{"name":"Mexican","value":394,"valuecolor":394,"level":1,"color":"#E0F295","id":"mexican"},{"name":"Middle Eastern","value":72,"valuecolor":72,"level":1,"color":"#FBFDB9","id":"middle_eastern"},{"name":"Moroccan","value":7,"valuecolor":7,"level":1,"color":"#FFFFBF","id":"moroccan"},{"name":"Not Listed/Not Applicable","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"not_listed_not_applicable"},{"name":"Nuts/Confectionary","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"nuts_confectionary"},{"name":"Other","value":40,"valuecolor":40,"level":1,"color":"#FFFFBF","id":"other"},{"name":"Pakistani","value":13,"valuecolor":13,"level":1,"color":"#FFFFBF","id":"pakistani"},{"name":"Pancakes/Waffles","value":6,"valuecolor":6,"level":1,"color":"#FFFFBF","id":"pancakes_waffles"},{"name":"Peruvian","value":49,"valuecolor":49,"level":1,"color":"#FBFDB9","id":"peruvian"},{"name":"Pizza","value":479,"valuecolor":479,"level":1,"color":"#D9EF8B","id":"pizza"},{"name":"Pizza/Italian","value":210,"valuecolor":210,"level":1,"color":"#EFF8AA","id":"pizza_italian"},{"name":"Polish","value":11,"valuecolor":11,"level":1,"color":"#FFFFBF","id":"polish"},{"name":"Portuguese","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"portuguese"},{"name":"Russian","value":31,"valuecolor":31,"level":1,"color":"#FFFFBF","id":"russian"},{"name":"Salads","value":24,"valuecolor":24,"level":1,"color":"#FFFFBF","id":"salads"},{"name":"Sandwiches","value":135,"valuecolor":135,"level":1,"color":"#F7FBB4","id":"sandwiches"},{"name":"Sandwiches/Salads/Mixed Buffet","value":91,"valuecolor":91,"level":1,"color":"#FBFDB9","id":"sandwiches_salads_mixed_buffet"},{"name":"Scandinavian","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"scandinavian"},{"name":"Seafood","value":78,"valuecolor":78,"level":1,"color":"#FBFDB9","id":"seafood"},{"name":"Soul Food","value":29,"valuecolor":29,"level":1,"color":"#FFFFBF","id":"soul_food"},{"name":"Soups & Sandwiches","value":17,"valuecolor":17,"level":1,"color":"#FFFFBF","id":"soups_&_sandwiches"},{"name":"Soups","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"soups"},{"name":"Southwestern","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"southwestern"},{"name":"Spanish","value":271,"valuecolor":271,"level":1,"color":"#ECF7A4","id":"spanish"},{"name":"Steak","value":37,"valuecolor":37,"level":1,"color":"#FFFFBF","id":"steak"},{"name":"Tapas","value":9,"valuecolor":9,"level":1,"color":"#FFFFBF","id":"tapas"},{"name":"Tex-Mex","value":58,"valuecolor":58,"level":1,"color":"#FBFDB9","id":"tex-mex"},{"name":"Thai","value":122,"valuecolor":122,"level":1,"color":"#F7FBB4","id":"thai"},{"name":"Turkish","value":20,"valuecolor":20,"level":1,"color":"#FFFFBF","id":"turkish"},{"name":"Vegetarian","value":45,"valuecolor":45,"level":1,"color":"#FFFFBF","id":"vegetarian"},{"name":"Vietnamese/Cambodian/Malaysia","value":42,"valuecolor":42,"level":1,"color":"#FFFFBF","id":"vietnamese_cambodian_malaysia"}],"type":"treemap","allowDrillToNode":true,"layoutAlgorithm":"squarified"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ad0614c0a43af533e354" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-ad0614c0a43af533e354">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[{"name":"Afghan","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"afghan"},{"name":"African","value":36,"valuecolor":36,"level":1,"color":"#FFFFBF","id":"african"},{"name":"American","value":2347,"valuecolor":2347,"level":1,"color":"#006837","id":"american"},{"name":"Armenian","value":11,"valuecolor":11,"level":1,"color":"#FFFFBF","id":"armenian"},{"name":"Asian","value":140,"valuecolor":140,"level":1,"color":"#F7FBB4","id":"asian"},{"name":"Australian","value":3,"valuecolor":3,"level":1,"color":"#FFFFBF","id":"australian"},{"name":"Bagels/Pretzels","value":72,"valuecolor":72,"level":1,"color":"#FBFDB9","id":"bagels_pretzels"},{"name":"Bakery","value":289,"valuecolor":289,"level":1,"color":"#E8F59F","id":"bakery"},{"name":"Bangladeshi","value":22,"valuecolor":22,"level":1,"color":"#FFFFBF","id":"bangladeshi"},{"name":"Barbecue","value":16,"valuecolor":16,"level":1,"color":"#FFFFBF","id":"barbecue"},{"name":"Bottled beverages, including water, sodas, juices, etc.","value":26,"valuecolor":26,"level":1,"color":"#FFFFBF","id":"bottled_beverages,_including_water,_sodas,_juices,_etc."},{"name":"Brazilian","value":10,"valuecolor":10,"level":1,"color":"#FFFFBF","id":"brazilian"},{"name":"CafÃ©/Coffee/Tea","value":429,"valuecolor":429,"level":1,"color":"#DCF090","id":"cafã©_coffee_tea"},{"name":"Cajun","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"cajun"},{"name":"Caribbean","value":277,"valuecolor":277,"level":1,"color":"#ECF7A4","id":"caribbean"},{"name":"Chicken","value":193,"valuecolor":193,"level":1,"color":"#EFF8AA","id":"chicken"},{"name":"Chilean","value":3,"valuecolor":3,"level":1,"color":"#FFFFBF","id":"chilean"},{"name":"Chinese","value":1058,"valuecolor":1058,"level":1,"color":"#99D368","id":"chinese"},{"name":"Chinese/Cuban","value":8,"valuecolor":8,"level":1,"color":"#FFFFBF","id":"chinese_cuban"},{"name":"Chinese/Japanese","value":22,"valuecolor":22,"level":1,"color":"#FFFFBF","id":"chinese_japanese"},{"name":"Continental","value":16,"valuecolor":16,"level":1,"color":"#FFFFBF","id":"continental"},{"name":"Creole","value":14,"valuecolor":14,"level":1,"color":"#FFFFBF","id":"creole"},{"name":"Creole/Cajun","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"creole_cajun"},{"name":"Czech","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"czech"},{"name":"Delicatessen","value":129,"valuecolor":129,"level":1,"color":"#F7FBB4","id":"delicatessen"},{"name":"Donuts","value":198,"valuecolor":198,"level":1,"color":"#EFF8AA","id":"donuts"},{"name":"Eastern European","value":37,"valuecolor":37,"level":1,"color":"#FFFFBF","id":"eastern_european"},{"name":"Egyptian","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"egyptian"},{"name":"English","value":6,"valuecolor":6,"level":1,"color":"#FFFFBF","id":"english"},{"name":"Ethiopian","value":5,"valuecolor":5,"level":1,"color":"#FFFFBF","id":"ethiopian"},{"name":"Filipino","value":12,"valuecolor":12,"level":1,"color":"#FFFFBF","id":"filipino"},{"name":"French","value":143,"valuecolor":143,"level":1,"color":"#F3FAAF","id":"french"},{"name":"Fruits/Vegetables","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"fruits_vegetables"},{"name":"German","value":17,"valuecolor":17,"level":1,"color":"#FFFFBF","id":"german"},{"name":"Greek","value":59,"valuecolor":59,"level":1,"color":"#FBFDB9","id":"greek"},{"name":"Hamburgers","value":175,"valuecolor":175,"level":1,"color":"#F3FAAF","id":"hamburgers"},{"name":"Hawaiian","value":5,"valuecolor":5,"level":1,"color":"#FFFFBF","id":"hawaiian"},{"name":"Hotdogs","value":10,"valuecolor":10,"level":1,"color":"#FFFFBF","id":"hotdogs"},{"name":"Hotdogs/Pretzels","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"hotdogs_pretzels"},{"name":"Ice Cream, Gelato, Yogurt, Ices","value":92,"valuecolor":92,"level":1,"color":"#FBFDB9","id":"ice_cream,_gelato,_yogurt,_ices"},{"name":"Indian","value":122,"valuecolor":122,"level":1,"color":"#F7FBB4","id":"indian"},{"name":"Indonesian","value":4,"valuecolor":4,"level":1,"color":"#FFFFBF","id":"indonesian"},{"name":"Iranian","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"iranian"},{"name":"Irish","value":77,"valuecolor":77,"level":1,"color":"#FBFDB9","id":"irish"},{"name":"Italian","value":455,"valuecolor":455,"level":1,"color":"#DCF090","id":"italian"},{"name":"Japanese","value":338,"valuecolor":338,"level":1,"color":"#E4F39A","id":"japanese"},{"name":"Jewish/Kosher","value":117,"valuecolor":117,"level":1,"color":"#F7FBB4","id":"jewish_kosher"},{"name":"Juice, Smoothies, Fruit Salads","value":76,"valuecolor":76,"level":1,"color":"#FBFDB9","id":"juice,_smoothies,_fruit_salads"},{"name":"Korean","value":108,"valuecolor":108,"level":1,"color":"#F7FBB4","id":"korean"},{"name":"Latin (Cuban, Dominican, Puerto Rican, South & Central American)","value":418,"valuecolor":418,"level":1,"color":"#E0F295","id":"latin_(cuban,_dominican,_puerto_rican,_south_&_central_american)"},{"name":"Mediterranean","value":84,"valuecolor":84,"level":1,"color":"#FBFDB9","id":"mediterranean"},{"name":"Mexican","value":394,"valuecolor":394,"level":1,"color":"#E0F295","id":"mexican"},{"name":"Middle Eastern","value":72,"valuecolor":72,"level":1,"color":"#FBFDB9","id":"middle_eastern"},{"name":"Moroccan","value":7,"valuecolor":7,"level":1,"color":"#FFFFBF","id":"moroccan"},{"name":"Not Listed/Not Applicable","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"not_listed_not_applicable"},{"name":"Nuts/Confectionary","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"nuts_confectionary"},{"name":"Other","value":40,"valuecolor":40,"level":1,"color":"#FFFFBF","id":"other"},{"name":"Pakistani","value":13,"valuecolor":13,"level":1,"color":"#FFFFBF","id":"pakistani"},{"name":"Pancakes/Waffles","value":6,"valuecolor":6,"level":1,"color":"#FFFFBF","id":"pancakes_waffles"},{"name":"Peruvian","value":49,"valuecolor":49,"level":1,"color":"#FBFDB9","id":"peruvian"},{"name":"Pizza","value":479,"valuecolor":479,"level":1,"color":"#D9EF8B","id":"pizza"},{"name":"Pizza/Italian","value":210,"valuecolor":210,"level":1,"color":"#EFF8AA","id":"pizza_italian"},{"name":"Polish","value":11,"valuecolor":11,"level":1,"color":"#FFFFBF","id":"polish"},{"name":"Portuguese","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"portuguese"},{"name":"Russian","value":31,"valuecolor":31,"level":1,"color":"#FFFFBF","id":"russian"},{"name":"Salads","value":24,"valuecolor":24,"level":1,"color":"#FFFFBF","id":"salads"},{"name":"Sandwiches","value":135,"valuecolor":135,"level":1,"color":"#F7FBB4","id":"sandwiches"},{"name":"Sandwiches/Salads/Mixed Buffet","value":91,"valuecolor":91,"level":1,"color":"#FBFDB9","id":"sandwiches_salads_mixed_buffet"},{"name":"Scandinavian","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"scandinavian"},{"name":"Seafood","value":78,"valuecolor":78,"level":1,"color":"#FBFDB9","id":"seafood"},{"name":"Soul Food","value":29,"valuecolor":29,"level":1,"color":"#FFFFBF","id":"soul_food"},{"name":"Soups & Sandwiches","value":17,"valuecolor":17,"level":1,"color":"#FFFFBF","id":"soups_&_sandwiches"},{"name":"Soups","value":2,"valuecolor":2,"level":1,"color":"#FFFFBF","id":"soups"},{"name":"Southwestern","value":1,"valuecolor":1,"level":1,"color":"#FFFFBF","id":"southwestern"},{"name":"Spanish","value":271,"valuecolor":271,"level":1,"color":"#ECF7A4","id":"spanish"},{"name":"Steak","value":37,"valuecolor":37,"level":1,"color":"#FFFFBF","id":"steak"},{"name":"Tapas","value":9,"valuecolor":9,"level":1,"color":"#FFFFBF","id":"tapas"},{"name":"Tex-Mex","value":58,"valuecolor":58,"level":1,"color":"#FBFDB9","id":"tex-mex"},{"name":"Thai","value":122,"valuecolor":122,"level":1,"color":"#F7FBB4","id":"thai"},{"name":"Turkish","value":20,"valuecolor":20,"level":1,"color":"#FFFFBF","id":"turkish"},{"name":"Vegetarian","value":45,"valuecolor":45,"level":1,"color":"#FFFFBF","id":"vegetarian"},{"name":"Vietnamese/Cambodian/Malaysia","value":42,"valuecolor":42,"level":1,"color":"#FFFFBF","id":"vietnamese_cambodian_malaysia"}],"type":"treemap","allowDrillToNode":true,"layoutAlgorithm":"squarified"}]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="section-1" class="section level2" data-width="350">
 <h2></h2>
 <div id="proportion-of-grading-in-each-year" class="section level3">
 <h3>Proportion of grading in each year</h3>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-800c5d93b28afba3758b" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-800c5d93b28afba3758b">{"x":{"visdat":{"b2465d8ea058":["function () ","plotlyVisDat"]},"cur_data":"b2465d8ea058","attrs":{"b2465d8ea058":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage (%)"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year","type":"category","categoryorder":"array","categoryarray":["2013","2014","2015","2016","2017"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2013","2014","2015","2016","2017"],"y":[76.340000000000003,76.790000000000006,79.409999999999997,81.489999999999995,78.760000000000005],"type":"bar","name":"A","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[19.350000000000001,17.399999999999999,15.83,14.77,11.06],"type":"bar","name":"B","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[3.23,5.3399999999999999,3.77,2.8799999999999999,2.6000000000000001],"type":"bar","name":"C","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[1.0800000000000001,0.46000000000000002,0.97999999999999998,0.75,0.70999999999999996],"type":"bar","name":"P","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016","2017"],"y":[0.10000000000000001,6.8700000000000001],"type":"bar","name":"Z","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ba0b411dc9a26d6a4d7b" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-ba0b411dc9a26d6a4d7b">{"x":{"visdat":{"b3104f8fd30d":["function () ","plotlyVisDat"]},"cur_data":"b3104f8fd30d","attrs":{"b3104f8fd30d":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Percentage (%)"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year","type":"category","categoryorder":"array","categoryarray":["2013","2014","2015","2016","2017"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2013","2014","2015","2016","2017"],"y":[76.340000000000003,76.790000000000006,79.409999999999997,81.489999999999995,78.760000000000005],"type":"bar","name":"A","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[19.350000000000001,17.399999999999999,15.83,14.77,11.06],"type":"bar","name":"B","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"textfont":{"color":"rgba(59,82,139,1)"},"error_y":{"color":"rgba(59,82,139,1)"},"error_x":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[3.23,5.3399999999999999,3.77,2.8799999999999999,2.6000000000000001],"type":"bar","name":"C","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2013","2014","2015","2016","2017"],"y":[1.0800000000000001,0.46000000000000002,0.97999999999999998,0.75,0.70999999999999996],"type":"bar","name":"P","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"textfont":{"color":"rgba(93,200,99,1)"},"error_y":{"color":"rgba(93,200,99,1)"},"error_x":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2016","2017"],"y":[0.10000000000000001,6.8700000000000001],"type":"bar","name":"Z","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="scores-by-each-borough" class="section level3">
 <h3>Scores by each borough</h3>
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-84c32f1aa7194ddfe582" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-84c32f1aa7194ddfe582">{"x":{"visdat":{"b24679774c6b":["function () ","plotlyVisDat"]},"cur_data":"b24679774c6b","attrs":{"b24679774c6b":{"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Borough"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Score"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","y":[9,13,22,11,27,10,10,11,5,10,13,9,21,9,13,12,2,19,3,12,9,9,9,10,9,9,4,12,7,8,9,10,17,10,12,12,7,21,19,10,12,4,25,24,17,20,7,9,75,12,6,28,12,13,11,12,7,10,11,7,10,10,22,11,64,11,21,13,11,10,13,19,10,12,15,12,7,11,13,9,7,10,12,10,10,10,7,2,12,7,12,12,12,13,13,9,2,5,23,11,12,8,6,10,10,4,13,10,7,12,10,12,10,12,11,10,7,6,21,13,9,4,11,7,15,13,10,6,33,23,11,10,10,12,9,12,18,12,13,47,2,9,6,25,10,12,12,8,9,8,7,12,12,13,12,9,9,12,18,11,7,17,13,11,9,19,13,10,12,11,9,7,2,7,11,3,7,9,11,14,7,12,7,7,3,20,11,7,4,13,10,24,11,23,13,18,9,2,29,12,10,26,20,29,4,9,38,4,5,13,12,10,5,7,13,11,8,10,25,13,13,19,10,14,7,19,11,26,6,21,10,22,11,10,9,11,15,4,9,44,10,12,11,11,2,11,9,12,13,19,11,6,21,12,11,23,10,7,12,40,7,12,10,4,9,13,2,24,13,24,13,20,12,21,8,10,12,12,12,12,12,11,13,12,13,13,13,12,11,19,12,5,26,12,11,12,11,11,8,9,4,10,13,12,11,25,2,7,27,8,7,22,13,10,9,10,52,11,12,13,8,13,2,10,12,14,11,11,12,11,9,12,6,9,13,7,12,12,14,20,8,12,11,12,7,25,12,11,11,9,7,9,12,5,11,10,12,13,6,9,13,7,10,9,12,9,17,11,7,9,11,13,7,23,24,8,19,12,22,10,5,9,4,33,11,7,11,7,22,17,9,9,14,7,11,12,11,12,13,7,10,6,27,5,12,8,10,13,13,11,11,8,12,43,17,9,11,11,16,11,11,9,12,5,19,26,10,13,12,11,19,11,13,14,7,19,12,13,6,9,12,7,8,12,13,11,51,10,10,11,12,23,13,12,3,28,20,8,9,20,24,10,11,11,13,12,11,11,13,9,13,7,10,12,11,3,12,14,7,10,9,9,12,8,12,11,3,12,12,9,8,18,11,13,12,13,18,7,9,9,27,33,27,27,10,24,7,63,26,12,10,3,19,12,4,13,13,12,27,11,5,12,10,2,5,13,12,19,19,7,12,53,20,12,16,7,11,13,56,10,9,29,9,10,11,11,11,8,26,12,23,11,20,7,13,5,56,7,53,19,9,12,11,9,9,2,14,7,7,12,13,13,7,25,23,11,7,19,12,7,7,12,9,11,2,7,12,15,30,12,18,13,25,10,6,27,10,10,8,12,2,12,11,23,9,6,9,12,12,5,35,8,10,10,13,13,25,18,4,13,12,9,13,12,17,19,22,12,5,13,22,12,3,9,12,10,5,5,13,24,7,12,12,13,10,12,3,24,12,9,6,11,12,28,12,11,4,12,12,10,7,25,4,9,8,2,5,34,48,7,22,44,12,21,16,7,10,12,27,23,13,13,32,10,13,28,11,4,4,9,19,47,6,12,16,13,25,11,26,13,56,5,5,10,12,30,18,9,23,9,9,13,18,10,12,35,12,35,12,12,10,15,5,13,10,19,18,13,8,7,12,9,9,3,11,10,5,9,12,9,12,32,11,7,9,4,11,9,6,13,12,9,9,11,7,27,13,22,10,11,11,9,11,10,17,8,10,8,7,7,12,11,9,13,13,10,7,10,22,11,24,2,10,6,9,14,7,9,30,6,2,12,24,11,2,10,21,13,5,32,10,12,28,8,7,13,17,12,12,9,3,2,12,11,13,9,4,17,12,11,8,20,14,4,26,10,10,24,9,9,10,12,10,9,9,7,13,21,6,9,13,12,20,7,13,15,7,8,12,9,11,8,12,12,56,22,8,9,12,13,27,21,26,7,12,27,28,26,12,12,12,4,10,13,31,9,9,11,12,13,18,4,40,11,31,12,16,12,11,11,13,7,12,10,12,12,5,43],"type":"box","name":"BRONX","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(59,82,139,0.5)","y":[10,12,12,26,12,19,10,9,12,32,9,12,16,9,4,13,11,13,26,10,11,13,11,12,13,8,7,13,11,9,8,13,10,26,18,8,10,22,12,12,8,13,25,12,12,8,3,12,9,10,5,13,12,11,10,12,10,5,13,43,11,13,19,10,22,10,10,12,7,27,12,10,27,12,11,12,9,10,13,13,19,9,9,11,10,12,11,13,12,10,37,10,10,7,9,7,20,11,21,10,18,8,8,12,5,4,9,13,12,6,9,9,13,11,12,12,11,19,40,12,10,21,12,20,7,10,7,13,21,12,5,18,18,11,10,7,10,15,11,11,7,11,7,12,27,19,26,9,12,9,25,12,12,3,9,15,10,11,8,7,10,10,13,7,2,13,11,10,11,24,30,4,24,10,22,7,12,15,9,13,19,12,13,13,13,9,7,11,2,26,3,8,7,7,10,19,7,18,10,5,11,10,5,10,10,10,7,4,10,20,7,13,9,7,43,17,13,9,12,9,12,2,2,12,13,16,6,9,23,4,13,7,7,19,13,12,10,13,12,11,6,11,13,13,19,12,12,11,11,11,7,19,12,18,30,13,11,18,11,12,12,10,3,17,13,5,28,11,3,10,9,8,4,7,12,12,13,12,10,7,12,26,6,9,12,12,15,9,9,4,7,12,13,10,12,12,10,7,10,2,12,11,8,12,7,7,10,2,13,13,12,10,9,18,10,5,10,27,8,10,12,20,12,10,10,8,12,10,13,14,45,34,3,12,21,7,12,10,10,11,9,12,12,13,13,2,13,11,12,7,5,9,13,9,13,13,13,13,6,9,10,7,17,5,8,26,23,13,7,5,2,12,13,12,11,26,9,8,7,14,13,9,2,27,10,11,10,32,9,9,10,13,7,12,30,12,13,13,7,11,13,11,27,10,13,9,9,12,23,37,10,11,12,27,26,20,13,8,17,12,13,8,8,7,7,5,2,12,2,7,12,9,7,14,13,11,10,12,13,9,37,4,13,12,20,13,8,20,7,10,5,18,8,10,2,12,11,7,12,11,11,9,26,12,8,13,12,9,10,9,13,7,13,8,13,10,12,9,9,20,12,11,13,12,8,13,11,7,11,5,10,10,12,21,7,13,10,13,10,13,11,11,11,10,31,19,12,13,18,12,5,10,11,9,3,19,12,13,13,12,51,7,12,7,8,13,13,7,7,8,20,12,11,4,5,4,8,13,10,31,5,20,11,8,12,11,11,13,10,12,12,20,12,12,12,11,7,31,11,12,22,2,13,10,2,10,24,9,13,22,13,12,12,25,10,17,12,11,61,13,11,9,13,3,38,3,32,19,7,7,27,11,9,13,9,3,5,9,9,9,7,61,11,12,11,10,28,12,9,13,12,11,21,6,10,10,2,12,5,9,9,22,4,10,2,10,11,10,9,22,11,19,13,20,24,11,17,5,8,7,9,2,6,27,8,7,9,9,12,54,6,13,10,5,8,33,11,22,13,11,2,12,32,56,11,81,8,12,10,13,5,31,6,11,9,10,17,7,10,19,12,25,18,9,8,12,10,7,7,10,8,2,12,19,13,12,17,19,2,8,7,11,18,19,11,24,10,13,22,7,9,12,11,10,7,13,10,13,25,13,9,11,13,22,24,13,10,20,8,19,10,13,12,9,3,7,12,13,5,16,24,10,11,8,13,9,17,25,11,13,10,13,9,7,9,19,13,9,7,6,38,13,13,37,9,11,12,12,37,12,12,12,13,17,35,9,10,12,8,9,22,13,7,12,7,8,8,12,9,26,10,11,6,10,9,10,7,27,26,10,10,13,9,13,10,11,7,10,10,10,11,7,11,14,5,7,7,7,2,11,12,5,5,12,12,15,12,12,7,12,10,17,8,9,7,12,30,31,24,7,24,9,30,9,11,23,11,12,13,7,7,13,7,10,9,2,10,5,18,18,17,12,12,9,33,10,13,11,12,12,17,27,13,9,11,10,13,9,47,13,7,5,13,9,27,12,13,26,12,12,13,9,7,20,4,32,26,13,27,8,10,8,12,9,7,11,9,12,13,10,9,12,9,13,7,10,19,18,18,9,12,11,13,11,10,10,13,50,10,10,12,23,12,22,13,8,8,13,19,12,7,12,10,11,2,10,9,8,12,7,25,5,12,10,9,9,11,8,13,10,9,10,13,11,12,7,10,12,12,5,7,9,7,13,12,18,17,9,13,9,13,12,12,10,9,12,24,13,10,9,8,6,42,12,8,12,9,4,12,26,12,12,7,12,13,8,13,7,14,7,10,7,20,12,11,12,12,9,22,60,12,19,13,10,7,22,5,38,13,12,21,6,26,11,13,16,13,9,12,10,8,13,12,12,7,11,12,5,13,10,12,10,11,5,7,10,18,12,11,12,9,24,10,10,13,12,10,43,12,18,12,16,13,12,9,13,12,5,10,2,55,11,38,21,9,11,12,18,3,5,9,7,12,19,12,6,12,12,12,13,21,27,18,8,13,11,8,11,11,13,12,7,11,5,13,13,17,20,6,16,20,9,10,12,12,9,4,10,2,12,7,12,14,12,4,13,10,26,12,7,13,10,2,7,7,12,10,12,12,6,52,24,12,24,12,11,24,10,10,10,13,8,11,16,12,16,9,8,10,9,4,13,10,12,3,12,13,12,10,61,7,10,29,11,21,12,12,13,10,12,9,8,12,13,12,11,13,7,27,12,20,12,7,9,5,10,7,13,9,12,20,12,8,13,12,13,11,13,5,8,12,17,13,11,9,46,4,18,12,19,6,21,18,12,13,17,12,18,15,13,12,11,27,12,12,26,4,9,12,12,12,39,13,2,13,10,13,9,2,12,12,14,7,11,7,14,10,17,26,13,17,11,9,44,11,9,11,6,9,13,7,23,10,12,7,12,23,3,24,3,11,2,11,10,10,9,12,7,9,10,42,9,12,11,28,2,10,11,26,13,11,10,9,24,13,13,10,10,13,10,12,13,12,23,12,3,12,12,13,4,12,5,26,3,12,8,10,19,2,9,18,12,13,9,12,10,12,13,12,12,12,10,10,13,10,4,11,9,29,15,13,13,12,5,13,7,13,10,9,12,10,9,11,18,4,5,3,5,7,12,13,9,24,7,20,21,4,9,24,12,5,9,25,21,11,7,18,12,20,12,7,21,11,20,9,8,13,22,7,20,7,11,10,7,10,12,8,9,25,13,11,10,17,13,12,12,11,10,3,27,11,13,27,12,7,13,18,27,29,12,9,24,2,8,10,7,2,8,8,23,12,9,10,8,7,23,10,25,10,13,12,7,13,9,13,13,18,26,8,4,9,12,13,11,19,40,11,19,11,27,13,21,13,13,15,9,12,12,11,2,11,18,12,10,14,6,7,11,12,2,16,9,27,12,16,11,12,10,25,9,12,25,12,13,13,12,13,2,11,7,10,23,5,33,11,7,5,9,11,13,12,12,7,9,12,13,7,13,12,7,10,10,12,10,10,4,55,12,11,12,11,7,9,11,12,13,8,9,49,11,9,11,13,11,9,26,12,14,12,12,9,9,13,9,22,10,9,12,9,13,12,33,9,13,13,12,13,12,12,13,12,10,24,15,11,10,13,12,12,17,13,7,2,11,12,13,4,12,16,12,11,13,23,14,20,8,10,12,7,2,7,11,20,12,10,13,13,21,37,7,10,12,15,13,10,12,11,25,22,7,18,11,12,11,10,5,12,12,7,13,12,2,27,10,33,12,19,12,9,9,7,8,13,9,8,16,23,10,13,13,6,19,4,8,7,8,7,9,13,12,10,2,5,7,27,13,10,12,10,12,7,19,8,11,13,7,12,9,7,22,25,13,8,12,9,4,13,12,11,7,14,5,34,9,86,13,12,5,9,13,12,11,20,27,9,24,13,12,10,4,12,7,12,9,8,10,26,7,11,7,13,5,12,9,13,19,12,26,12,22,3,20,4,16,12,8,10,19,21,12,7,18,9,9,13,8,10,9,16,10,10,13,13,8,25,11,32,13,10,7,6,7,10,4,4,6,9,12,10,10,9,12,23,13,12,25,13,15,2,14,10,26,9,11,14,12,9,11,13,15,12,10,7,7,12,16,6,12,21,12,13,10,10,9,13,9,12,5,11,11,12,7,10,9,12,13,12,12,7,11,10,13,3,9,10,20,8,6,39,15,6,21,4,11,13,11,13,17,13,11,10,12,13,11,5,12,12,9,17,12,8,15,12,11,16,5,7,7,13,7,27,10,12,12,10,24,11,21,8,23,12,9,10,11,12,5,3,19,11,11,11,2,3,8,14,12,11,12,13,11,13,7,11,11,27,12,12,12,7,13,12,12,5,11,12,59,7,7,10,13,5,12,10,11,5,11,12,11,19,2,12,5,21,20,12,13,10,27,10,9,12,9,9,12,27,12,12,10,12,13,10,10,11,12,10,12,10,20,32,23,7,12,12,10,13,12,12,9,73,12,19,13,16,12,7,10,13,73,2,13,12,12,10,9,13,21,10,11,9,13,13,7,11,25,17,10,10,12,11,8,7,11,6,12,13,11,13,12,23,12,9,12,14,7,25,7,19,15,27,2,11,13,2,9,11,12,13,24,9,18,13,13,13,9,32,13,10,13,7,6,24,12,12,13,13,13,13,2,7,13,13,11,8,13,7,12,13,7,27,7,19,7,9,13,10,11,9,32,11,13,10,9,17,12,27,11,9,20,7,48,8,12,9,4,9,12,7,10,12,7,9,21,7,15,9,9,4,19,38,9,12,13,17,13,9,20,7,26,4,5,11,19,13,11,11,13,19,12,9,12,13,2,10,7,27,9,12,11,4,13,17,12,9,13,11,12,12,7,12,10,10,12,24,8,13,12,24,10,12,15,12,11,18,12,13,8,10,12,21,5,20,11,13,9,11,16,5,12,15,9,13,7,18,12,9,13,20,13,6,19,12,11,12,12,8,13,2,7,5,8,20,11,3,21,12,3,13,13,12,8,19,50,12,10,13,12,9,11,12,7,25,11,2,7,12,18,13,7,21,10,9,17,11,9,18,7,13,43,12,36,9,9,15,11,11,13,12,17,5,12,7,13,14,25,10,4,12,10,6,9,26,9,4,13,9,9,4,9,7,14,23,17,19,23,4,7,12,12,8,13,7,13,10,20,9,7,12,11,12,11,12,12,10,9,13,12,4,7,11,11,16,7,2,26,7,13,18,11,20,12,12,12,7,24,13,8,14,17,10,21,12,7,10,7,13,12,9,12,9,11,10,14,11,13,12,10,10,7,11,27,9,9,7,13,9,10,13,9,9,17,11,4,9,25,13,12,13,8,4,7,11,19,12,13,11,7,12,26,9,12,10,12,7,5,27,13,12,6,9,12,11],"type":"box","name":"BROOKLYN","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"line":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(33,144,141,0.5)","y":[12,11,9,48,13,13,10,23,10,63,8,26,7,12,10,26,13,3,8,5,12,13,13,7,10,7,13,17,21,24,12,5,19,11,12,42,9,22,9,9,9,13,9,2,4,13,5,7,8,9,12,18,10,12,7,10,12,9,12,17,8,8,9,13,13,11,10,13,12,11,11,12,11,35,11,9,19,9,13,12,9,10,13,10,12,12,2,14,10,11,13,2,12,44,12,12,7,5,4,11,25,11,12,12,11,7,18,11,10,7,10,5,29,10,11,9,26,12,9,12,15,5,8,12,9,19,8,13,13,11,10,33,42,46,7,8,13,11,12,11,13,10,7,8,10,11,2,27,24,4,23,9,11,7,6,26,25,10,7,11,11,7,13,4,12,9,21,20,13,13,12,26,13,12,10,13,24,9,12,11,11,12,18,2,62,9,12,12,12,11,8,7,13,12,12,5,6,26,11,14,9,12,14,10,7,11,7,10,24,15,11,18,7,12,12,11,6,9,10,39,12,13,9,13,11,6,7,2,12,13,9,4,12,10,10,15,10,9,9,7,12,12,11,13,12,7,13,13,18,7,26,11,20,10,30,8,7,25,12,10,23,12,13,12,13,12,10,7,11,12,13,11,23,11,13,12,9,12,13,8,13,5,9,13,13,9,16,34,16,10,10,13,8,12,25,7,13,9,16,12,10,2,10,14,3,27,4,11,27,2,13,10,10,3,3,12,13,12,12,20,17,10,11,9,2,7,7,13,10,12,17,10,21,2,16,12,25,20,14,10,12,12,2,27,10,10,12,13,12,13,7,11,28,21,12,12,7,11,25,12,20,20,2,2,17,4,12,13,12,40,12,16,13,12,23,12,9,5,12,5,17,9,13,12,2,18,9,20,7,17,10,12,13,6,12,16,11,18,14,13,10,13,9,13,12,10,13,16,12,12,12,12,12,46,9,10,23,26,20,12,18,12,27,10,5,4,11,13,17,9,7,12,12,26,15,13,12,12,13,13,8,7,2,7,12,8,7,9,8,27,14,7,11,9,11,10,12,12,12,35,10,12,12,9,10,4,11,12,13,17,9,26,11,13,24,27,21,9,21,10,32,13,7,23,10,10,2,10,9,26,12,13,12,36,9,7,11,13,35,7,20,6,10,7,24,20,11,9,11,12,10,9,12,2,12,13,12,12,11,12,27,16,9,13,16,11,7,10,12,20,11,23,9,12,4,12,13,25,9,9,10,15,18,11,13,9,22,13,9,8,7,15,13,6,13,13,16,47,15,18,13,9,10,13,13,20,7,9,9,13,4,8,3,12,12,13,10,9,29,12,11,11,12,40,7,11,11,4,10,9,10,18,14,10,8,12,26,9,6,8,12,10,10,12,11,12,16,11,12,11,12,10,12,9,20,11,13,10,13,11,13,13,12,12,9,9,13,12,12,9,34,12,13,12,11,11,9,11,13,12,7,7,21,36,24,9,12,8,12,12,12,11,21,7,7,11,8,23,7,10,7,13,11,9,11,24,16,11,3,11,12,8,9,11,11,11,9,7,16,13,12,12,12,13,7,7,8,23,7,13,13,13,12,11,10,12,10,27,7,12,12,29,12,9,13,11,13,35,14,9,13,13,12,48,12,13,9,10,8,12,8,23,4,6,3,11,10,7,25,12,18,11,12,10,12,12,11,7,8,8,33,11,11,22,10,12,12,7,6,24,11,13,12,7,13,10,25,4,11,12,12,4,11,30,13,8,11,15,10,11,11,12,22,10,24,17,12,42,11,8,8,14,11,7,8,19,12,6,11,11,20,9,9,23,7,12,9,8,24,22,78,10,2,9,7,19,4,10,12,19,7,9,10,2,11,32,15,10,19,12,2,7,4,31,22,23,12,9,13,9,13,11,24,13,19,9,10,13,25,13,9,13,18,13,8,7,12,13,32,10,13,7,11,23,22,12,13,20,8,9,10,10,2,23,12,17,12,13,22,7,9,2,11,11,12,13,12,7,12,10,12,18,11,12,13,7,12,12,12,15,12,27,15,7,12,5,11,10,7,13,2,13,9,12,27,12,12,11,10,2,30,11,11,12,17,25,11,12,21,13,12,13,12,12,27,12,11,10,9,11,7,10,10,11,11,11,11,16,11,11,11,12,12,8,7,8,17,6,46,12,5,16,13,13,25,40,10,27,13,9,10,6,10,10,16,2,11,13,9,12,15,13,11,9,8,9,12,25,13,11,48,65,18,12,9,8,13,7,8,11,13,9,30,18,11,34,10,9,7,12,10,8,26,19,10,13,20,10,17,12,7,21,3,7,5,10,17,2,11,13,23,4,9,2,12,11,37,11,10,7,17,11,7,10,11,7,18,12,23,24,50,12,23,4,13,13,13,3,12,12,11,13,2,12,26,40,43,16,9,18,13,13,12,24,15,9,9,13,9,12,13,10,23,11,26,20,12,7,12,10,13,11,10,12,12,5,13,13,2,10,7,13,13,11,12,6,18,10,7,12,7,9,13,13,24,12,10,11,9,9,7,24,11,12,7,13,7,22,12,9,7,56,9,25,9,9,9,13,12,2,11,10,12,13,13,7,7,13,25,26,11,12,10,12,2,10,10,12,7,9,13,53,10,12,7,24,13,11,12,13,12,7,24,11,10,18,26,10,11,11,12,23,12,13,26,13,9,13,12,11,12,24,19,7,30,11,9,6,13,13,19,7,12,7,12,10,9,12,13,12,10,13,13,11,21,9,25,9,13,21,12,13,9,10,7,13,4,9,7,8,11,8,38,25,10,20,13,2,23,12,9,9,12,8,13,10,12,18,4,12,13,7,12,4,10,11,13,8,7,11,12,24,7,11,9,9,7,9,25,8,9,7,12,9,24,22,52,25,13,7,7,4,5,10,10,28,11,10,12,13,7,5,4,9,2,8,12,12,9,10,7,9,12,11,18,11,11,2,5,12,12,12,13,13,13,7,10,12,11,5,8,20,9,12,3,9,12,9,12,12,12,13,46,20,13,11,12,10,12,10,9,13,11,22,11,4,5,10,4,13,3,13,10,10,2,18,12,13,4,11,12,9,2,11,5,13,10,7,26,9,12,11,19,3,9,12,23,12,5,10,15,13,11,12,8,13,10,27,9,14,19,9,13,7,3,13,9,12,27,12,4,8,7,4,13,13,12,11,9,12,12,13,10,13,13,2,7,11,6,9,23,13,13,7,23,12,13,28,2,13,13,13,19,9,12,25,4,6,5,12,27,4,12,21,12,12,11,5,9,12,11,6,12,11,11,6,11,7,12,7,27,11,13,10,12,11,10,9,12,21,33,12,11,11,13,12,12,23,12,13,9,7,12,14,10,12,31,13,20,5,12,13,13,11,12,7,13,7,12,12,7,12,22,12,13,5,27,2,10,8,10,12,7,2,27,4,13,13,41,11,9,13,35,12,5,11,20,12,19,4,17,9,4,19,2,8,12,10,4,10,15,12,7,13,13,13,12,25,7,7,13,12,9,10,13,10,26,10,9,13,23,10,10,5,7,12,17,26,13,26,12,12,12,18,13,13,2,9,12,11,13,27,29,13,5,16,8,13,7,35,10,12,22,8,3,11,7,11,7,9,21,10,13,5,12,12,12,11,12,12,2,12,12,10,10,10,9,11,7,16,10,7,13,9,13,7,10,13,11,9,12,12,2,19,10,12,11,12,12,13,8,7,11,6,7,6,25,14,11,23,26,10,2,13,3,11,8,12,10,4,12,12,8,9,13,13,11,12,17,10,8,12,23,12,12,10,20,10,12,12,9,13,4,24,14,12,11,11,23,12,25,11,9,12,25,16,9,9,12,11,10,13,12,7,12,13,7,13,9,6,13,14,33,12,8,10,7,38,7,11,10,20,12,2,7,9,8,5,10,26,6,12,63,12,13,7,9,12,22,13,13,17,24,19,10,13,11,10,11,12,7,12,14,21,7,12,10,4,12,10,11,12,10,11,13,2,11,12,7,11,3,7,22,12,11,50,12,10,12,10,12,17,9,9,17,7,12,15,12,12,17,12,11,37,11,23,11,13,17,9,12,13,10,17,11,8,2,9,12,11,4,15,11,7,9,23,12,3,3,10,7,10,22,10,9,12,12,13,9,13,10,15,26,11,9,9,12,11,13,13,24,4,7,11,11,12,9,19,9,12,11,26,8,8,9,7,7,9,4,11,12,13,5,10,37,7,9,5,4,8,11,10,10,12,10,13,9,10,12,5,9,9,5,13,9,27,30,10,12,15,47,10,5,41,15,8,9,11,12,34,14,9,9,15,4,9,24,2,13,12,12,9,21,20,10,12,9,7,9,7,7,10,9,12,11,13,26,9,12,25,12,13,13,36,2,8,2,9,13,9,9,23,2,26,12,9,26,5,5,11,7,15,7,12,6,10,12,21,9,12,12,2,8,12,12,12,13,6,12,12,17,23,9,10,7,9,3,3,10,10,13,9,7,19,23,12,13,11,6,10,10,7,11,9,2,29,6,9,13,7,12,12,9,25,27,8,12,10,7,9,9,26,3,19,5,4,9,8,10,12,12,12,12,12,37,25,10,12,11,10,12,8,13,12,11,13,48,9,12,9,13,7,11,13,7,12,13,12,8,26,11,7,9,11,9,12,2,12,13,13,5,11,7,9,5,14,11,10,14,9,32,7,13,10,10,13,13,13,10,12,4,9,4,12,17,10,10,7,10,12,14,9,2,18,12,11,9,13,9,12,12,10,30,22,12,7,11,17,3,7,30,12,3,12,10,7,5,12,9,7,11,12,12,12,12,7,5,21,11,5,18,10,27,21,12,5,10,9,9,10,13,18,12,20,5,10,12,10,9,7,10,12,11,10,2,18,13,2,7,13,9,5,20,13,7,8,7,10,3,10,12,12,12,17,17,9,7,12,12,24,18,21,11,12,12,13,9,13,7,12,13,8,12,12,6,47,11,10,11,11,25,13,4,12,13,11,12,12,12,13,7,12,4,48,25,10,10,9,11,13,20,13,17,13,31,12,11,12,21,9,13,8,9,3,5,19,8,10,5,9,4,6,11,25,7,4,12,13,17,13,10,11,13,7,30,10,29,3,7,10,8,9,19,11,22,10,9,11,11,9,8,26,11,13,8,12,22,22,12,38,7,12,12,19,5,9,27,48,21,10,12,12,8,10,4,13,7,9,4,7,12,7,10,32,5,15,4,12,13,8,2,12,12,10,8,13,8,2,12,12,12,9,13,9,12,9,5,10,26,10,14,11,9,9,38,26,26,8,9,26,7,10,10,10,11,13,9,9,10,24,13,8,13,12,11,6,18,13,2,15,26,2,12,11,9,27,12,5,7,13,18,2,12,10,7,9,13,11,11,9,7,12,10,7,11,12,12,11,7,10,11,13,9,12,10,10,11,12,33,13,12,11,13,10,12,13,12,12,12,29,45,13,12,13,11,12,12,2,13,12,9,4,8,13,7,5,12,10,13,13,22,13,5,11,32,13,13,11,9,12,9,12,11,11,13,9,13,12,11,11,63,15,13,9,13,7,27,11,18,13,13,23,7,12,16,13,11,12,16,9,11,19,9,12,12,25,12,8,15,45,12,10,9,9,12,12,7,7,8,2,9,11,5,5,8,7,12,14,13,13,17,11,13,13,12,27,18,10,5,24,8,11,30,12,9,8,4,13,11,13,20,7,10,10,5,27,11,9,24,38,10,17,9,10,2,12,21,12,13,13,7,10,5,22,12,13,10,9,19,11,5,13,7,12,3,10,19,26,13,10,10,12,12,12,24,10,12,12,9,12,25,27,10,10,10,11,4,13,17,10,11,13,15,9,17,7,13,12,10,8,8,12,7,13,2,7,40,7,12,11,12,10,12,12,13,7,11,10,10,10,13,11,13,13,9,16,12,7,8,12,2,9,12,5,12,12,2,7,3,9,10,10,13,12,25,7,8,27,13,12,5,19,12,9,16,9,10,12,5,37,12,9,27,5,16,12,9,11,13,12,13,5,9,12,9,8,23,18,13,4,13,4,20,3,8,12,13,7,9,23,10,5,10,12,21,12,12,20,12,10,12,12,21,4,25,9,9,4,7,13,9,6,3,9,11,11,7,11,13,30,23,9,35,9,24,13,8,7,9,17,6,11,7,12,6,9,26,12,13,12,5,10,22,22,20,22,26,7,13,4,10,13,12,9,2,13,10,9,11,18,26,7,22,10,34,27,10,10,7,12,12,9,12,9,10,10,3,12,16,9,7,12,11,26,12,12,12,12,15,9,9,10,8,12,9,27,10,13,13,11,23,13,15,9,22,10,9,7,12,2,4,16,37,12,7,16,10,12,15,10,10,4,13,11,12,12,12,13,11,18,8,11,12,11,7,11,10,10,7,12,7,16,12,10,28,9,12,24,10,12,19,17,10,11,7,10,12,12,14,6,2,12,11,19,11,12,13,10,7,8,30,2,9,11,14,9,14,13,11,7,12,5,9,10,13,12,13,12,9,9,11,16,7,9,9,9,12,10,12,12,7,12,20,37,13,12,13,11,9,10,11,12,14,8,6,9,11,9,13,7,13,7,2,4,12,8,9,26,12,20,12,20,5,13,7,11,24,9,12,6,13,9,12,11,12,4,12,12,18,10,10,13,9,13,10,12,11,20,24,13,38,42,10,13,37,24,12,27,13,9,12,9,11,9,12,12,18,11,13,13,25,10,9,11,11,22,7,11,12,7,12,4,12,9,10,26,12,7,9,9,11,12,7,36,12,12,11,10,10,12,8,8,22,12,13,13,17,15,20,15,12,28,18,12,6,10,19,16,9,7,11,13,6,12,10,11,21,7,22,17,10,11,12,12,4,10,11,12,2,17,4,13,11,11,11,22,12,26,13,10,13,26,9,7,13,18,12,4,37,12,10,13,44,7,21,12,3,16,10,13,9,7,8,3,9,12,7,2,13,7,12,11,9,14,10,25,11,10,9,12,7,2,12,2,26,6,17,4,11,8,5,12,27,12,12,6,9,13,8,4,10,7,13,12,27,12,7,22,10,12,10,13,9,13,9,24,10,24,17,12,12,10,11,2,13,12,24,12,5,12,12,11,12,10,7,12,13,17,11,8,6,9,7,12,9,11,23,12,9,10,9,12,9,27,9,21,8,2,5,22,13,27,10,9,10,9,9,12,45,19,8,10,10,11,9,7,6,12,10,10,63,12,10,26,22,7,10,13,12,10,11,9,10,7,11,9,7,13,12,7,12,5,2,12,12,7,13,9,11,7,8,10,10,7,10,7,8,11,16,7,9,8,12,7,16,20,13,11,13,13,32,5,13,12,18,11,16,4,5,17,7,32,12,10,7,13,11,6,10,40,4,8,12,9,6,12,9,13,13,13,36,8,10,9,11,11,11,17,2,12,13,10,12,9,7,12,12,5,12,8,12,9,18,9,12,13,12,12,7,9,5,15,20,12,9,13,7,15,4,10,10,12,24,29,26,3,13,13,10,6,10,7,12,11,9,9,9,2,7,5,12,10,12,23,4,5,13,22,12,13,7,12,7,24,7,13,10,9,13,6,19,7,25,7,12,12,9,10,9,56,9,8,12,10,21,4,11,27,9,9,10,13,10,12,13,26,13,11,23,15,11,39,7,16,25,26,13,12,13,11,12,9,3,10,10,8,23,8,14,12,8,11,13,10,24,11,11,10,11,12,2,8,11,9,11,18,25,13,11,9,5,9,12,10,20,12,9,7,11,9,5,16,10,11,16,11,10,7,11,22,13,7,7,9,3,27,22,26,12,22,12,14,7,7,13,18,12,13,13,30,9,12,4,13,11,8,10,24,10,12,11,13,8,12,6,13,10,12,7,9,38,22,11,4,9,5,9,7,9,12,13,12,5,10,21,13,7,10,9,12,27,12,11,17,12,9,12,13,27,13,9,13,12,10,12,10,12,10,11,12,12,10,10,2,16,14,12,12,12,6,12,9,12,26,8,13,12,2,10,10,7,9,9,11,30,9,10,5,9,27,10,10,8,12,18,9,10,10,9,13,12,12,13,11,10,15,11,13,7,13,10,11,12,8,13,13,10,11,11,10,7,31,3,12,20,17,2,12,13,7,10,10,13,5,13,4,8,12,8,13,13,34,12,11,11,12,9,10,12,9,12,10,12,10,13,11,13,21,11,12,12,15,9,7,11,7,9,13,8,10,8,27,7,13,19,7,12,13,26,10,9,12,10,8,13,12,10,8,6,13,7,11,26,23,8,7,10,12,13,7,13,23,5,7,21,10,10,3,22,5,44,12,9,23,13,25,12,12,11,12,5,9,12,8,11,10,11,10,10,11,16,4,7,7,11,3,10,12,25,8,13,12,4,2,12,4,10,10,5,7,10,11,10,4,9,2,12,13,10,12,21,14,12,10,4,15,13,13,10,10,12,12,25,10,10,4,12,12,10,10,7,25,11,10,8,13,11,7,8,11,13,12,5,10,12,7,12,2,7,20,12,10,12,12,17,12,10,13,13,2,37,7,8,13,7,41,12,13,23,13,12,10,7,12,7,13,10,4,7,16,10,9,2,26,20,11,13,10,12,13,9,7,12,8,12,13,13,12,13,15,13,9,13,11,7,12,4,12,7,13,3,12,12,11,13,12,7,6,9,9,40,11,11,9,2,12,13,10,13,12,12,9,11,10,20,9,9,9,26,10,10,9,10,18,13,13,5,12,7,13,17,9,11,10,7,20,20,11,10,9,7,10,30,12,3,7,12,7,11,13,33,12,23,10,5,13,10,13,26,4,13,7,14,19,12,11,9,13,2,13,10,11,9,20,12,12,11,12,2,11,25,10,13,12,13,6,12,12,18,13,12,5,12,5,7,12,9,12,32,27,8,9,5,6,12,13,11,3,13,8,5,26,16,20,29,12,11,9,13,3,13,8,13,13,10,5,25,9,9,6,13,12,12,15,13,24,10,18,11,8,10,10,10,17,2,2,11,11,12,12,11,13,13,27,11,10,12,12,12,10,9,11,13,15,8,20,10,10,12,27,12,12,13,24,9,12,9,22,12,25,9,10,13,13,3,10,11,13,13,25],"type":"box","name":"MANHATTAN","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(93,200,99,0.5)","y":[10,11,19,12,15,12,7,10,12,12,13,13,6,12,11,9,11,7,7,11,9,10,25,12,50,20,3,4,7,12,13,13,9,9,21,12,7,12,7,5,48,12,10,16,7,10,8,10,6,12,7,41,17,8,12,13,26,10,30,20,19,5,2,20,26,5,41,13,8,12,9,10,9,11,12,12,10,12,13,8,13,21,9,11,10,9,10,11,24,12,10,12,26,11,8,32,12,12,47,9,4,12,11,9,9,9,7,8,12,11,10,11,7,10,10,4,13,11,5,7,25,12,12,27,12,26,7,2,12,13,9,10,13,13,26,11,9,12,23,25,10,12,25,11,11,34,7,12,13,12,11,8,12,19,12,12,36,11,4,26,25,11,13,12,9,10,13,27,13,32,10,2,2,7,24,7,10,9,10,44,4,2,12,11,9,13,22,10,12,9,11,10,10,12,12,11,10,12,10,23,12,10,25,21,13,22,7,5,10,22,10,13,24,10,8,4,24,39,12,25,13,13,21,12,10,3,11,9,9,21,12,21,13,7,9,12,10,13,9,2,10,3,12,10,59,11,11,34,11,10,8,12,13,4,12,9,10,3,18,11,11,13,11,12,12,13,12,12,11,11,14,13,19,12,13,12,4,12,11,12,12,13,11,12,7,9,13,3,7,12,12,17,4,10,16,11,10,11,13,12,13,7,12,18,13,11,10,11,18,23,12,12,21,12,13,5,13,12,8,10,12,8,13,16,11,11,13,18,11,27,12,10,7,7,13,7,8,7,12,22,9,9,10,13,11,33,10,11,13,16,10,12,10,48,6,5,12,31,12,12,12,9,12,18,7,11,9,13,17,9,10,13,13,22,37,12,14,11,12,10,12,11,11,34,11,38,18,12,4,11,34,7,13,12,21,5,35,10,10,6,9,7,49,11,10,7,9,12,11,13,20,12,9,11,9,13,7,5,11,24,13,8,59,10,4,8,2,12,20,11,11,18,12,9,12,6,11,5,18,13,9,12,10,61,10,13,9,10,13,11,4,10,25,12,12,9,9,9,4,13,12,9,8,11,7,10,11,11,26,18,12,13,7,11,7,12,9,11,12,9,10,13,19,16,10,12,13,9,12,10,13,11,10,51,10,11,19,9,8,8,14,11,30,10,5,7,12,31,12,25,12,13,27,10,8,12,10,3,11,9,35,10,10,7,6,10,10,8,17,26,27,28,7,11,10,27,12,12,27,13,10,13,13,10,28,4,20,10,13,10,12,11,7,13,26,7,12,9,8,7,12,24,7,10,11,10,7,8,20,11,19,12,2,11,10,12,7,15,7,4,3,9,8,9,6,11,11,13,13,7,22,6,2,10,28,12,10,4,13,12,5,24,12,5,37,22,8,26,36,7,11,9,13,30,11,25,13,12,7,13,32,20,11,9,13,10,5,12,7,13,7,13,7,17,11,12,12,12,11,18,13,3,7,12,21,21,13,12,11,26,9,13,10,35,21,36,22,12,19,12,10,10,26,22,11,12,4,13,2,12,4,9,11,9,4,11,13,13,9,11,11,10,21,10,12,7,3,12,13,10,47,22,7,20,12,13,18,11,8,9,10,13,8,12,10,20,4,13,9,11,11,12,11,12,11,9,10,33,14,13,10,12,11,11,3,9,8,10,7,23,13,8,11,12,11,12,11,10,6,11,11,9,20,12,23,13,13,12,9,5,9,15,5,10,16,10,11,5,7,12,7,13,11,12,7,11,12,7,13,11,10,13,9,10,4,10,12,27,12,6,11,10,12,13,13,7,17,12,11,12,10,15,8,25,8,7,21,7,12,12,12,22,12,9,11,12,26,11,10,10,8,13,37,11,18,9,4,9,7,9,5,10,26,11,12,20,12,34,13,8,12,11,19,12,9,19,9,12,9,9,12,12,11,10,9,12,8,9,11,10,13,11,10,6,7,9,12,7,10,10,13,10,7,13,8,12,19,22,7,11,7,13,12,13,7,19,12,54,25,12,13,12,15,9,25,9,10,20,6,11,35,33,50,7,10,11,6,13,9,9,9,10,10,20,7,9,22,14,12,10,7,31,18,13,7,17,9,11,12,2,2,8,9,4,34,15,10,12,13,9,12,12,12,6,13,9,12,22,15,4,7,12,9,20,12,26,9,5,7,4,10,14,13,13,19,7,3,11,12,8,9,10,5,5,9,9,7,6,21,11,6,12,11,10,13,18,12,20,9,9,12,19,12,11,11,16,14,29,26,25,11,13,19,11,9,12,11,5,7,10,13,10,13,9,13,7,11,13,6,11,12,7,5,10,18,9,31,22,7,12,12,4,7,9,12,9,3,9,19,8,13,7,8,13,2,31,4,12,7,10,11,11,10,7,5,9,10,6,14,11,13,4,3,13,5,12,23,9,19,12,12,12,11,27,18,12,12,13,7,11,11,26,12,11,11,12,21,12,13,13,16,11,11,21,9,18,7,13,4,7,12,37,7,30,12,4,27,5,17,12,18,5,11,4,10,13,11,12,7,10,25,11,7,16,6,10,12,8,6,10,10,7,9,23,19,13,11,12,21,11,12,24,4,10,10,11,13,4,2,10,12,10,15,13,7,12,13,10,12,7,18,14,12,15,13,9,11,11,10,9,12,6,13,10,10,11,30,19,5,14,11,17,9,9,7,25,12,4,12,13,23,6,9,47,12,10,12,12,12,9,13,36,13,13,2,13,7,12,36,10,5,10,13,11,30,18,13,11,9,4,32,12,3,11,19,15,10,13,11,13,9,24,10,18,2,9,11,12,13,7,13,10,12,12,12,8,7,10,9,7,12,9,12,7,11,7,9,21,12,25,8,22,11,6,24,9,10,28,16,12,10,13,12,7,12,14,9,13,12,12,9,12,7,12,40,12,11,13,13,13,10,12,12,25,11,10,6,27,12,7,7,38,2,11,12,13,10,13,12,13,12,10,4,9,4,10,2,13,4,11,13,26,9,8,9,2,27,10,12,12,7,12,14,9,18,10,11,13,4,7,9,12,12,22,23,12,11,11,12,13,17,9,12,12,27,13,9,14,7,9,6,13,10,7,15,13,26,5,4,13,13,26,22,10,12,17,30,8,5,6,13,10,13,11,12,11,12,11,13,3,7,12,15,18,10,7,13,12,9,7,12,11,5,11,11,20,12,19,10,12,13,6,19,12,16,11,12,11,10,13,10,4,9,9,12,2,12,7,13,12,6,11,11,9,13,2,23,12,5,23,11,5,8,35,12,5,8,10,24,11,20,13,12,10,5,13,11,25,27,7,10,22,11,27,10,13,18,12,9,9,13,7,15,10,11,2,7,23,2,13,13,10,13,9,9,12,12,10,13,9,10,10,24,11,8,11,13,10,13,5,12,9,13,10,12,13,4,2,26,21,12,9,11,9,12,5,9,10,10,12,23,13,10,13,2,13,26,3,4,11,6,10,9,12,5,13,11,9,11,13,14,12,19,12,22,12,10,12,10,13,9,9,11,18,26,9,10,21,9,21,10,7,13,7,2,9,12,12,10,5,12,11,12,12,11,13,10,12,26,7,6,25,14,10,9,10,11,4,35,4,20,12,13,7,8,10,5,20,19,12,7,7,12,12,5,28,18,13,5,13,9,9,11,23,4,6,24,10,25,13,12,12,12,11,4,12,42,12,11,13,11,12,2,22,9,21,13,17,12,10,10,10,10,12,13,19,8,11,17,5,18,11,12,9,12,9,46,13,13,13,8,9,18,7,12,12,8,9,21,12,7,10,8,11,9,12,10,9,12,2,32,10,10,2,8,12,8,12,9,11,20,2,17,21,11,7,7,13,8,9,9,10,9,21,11,7,12,12,5,19,9,11,9,8,10,14,4,7,12,7,8,22,7,8,10,11,32,10,9,12,22,7,9,66,8,7,12,19,11,4,7,9,37,10,24,12,10,26,9,12,13,13,12,2,36,10,20,13,12,10,10,9,16,33,20,12,12,55,19,10,25,7,17,9,9,7,11,9,7,9,12,13,11,8,9,24,14,5,23,21,7,12,9,12,12,20,12,11,10,6,9,7,11,11,19,21,10,6,5,10,13,11,11,11,26,12,11,7,9,31,26,10,12,7,11,12,20,35,21,11,10,37,3,12,12,10,23,12,2,13,21,12,7,9,12,10,13,54,17,12,12,10,12,25,13,9,10,12,12,28,19,5,7,10,7,8,10,11,11,12,15,13,10,51,10,47,4,9,7,7,9,11,11,19,23,11,12,16,12,12,18,36,8,10,27,10,10,31,10,11,12,12,43,4,46,13,11,7,12,12,12,30,12,7,11,12,13,8,12,78,11,12,11,5,8,9,13,10,9,12,12,12,13,2,12,9,12,8,5,3,9,9,12,4,32,9,12,23,11,27,9,11,25,13,2,12,23,9,13,10,12,12,12,24,20,7,11,11,3,9,12,47,13,4,26,21,6,12,27,13,43,12,5,10,19,10,13,9,17,13,6,9,22,6,9,13,7,20,12,10,7,12,7,9,20,10,11,11,11,13,10,7,13,2,9,11,37,7,10,29,12,19,10,10,7,32,7,8,12,11,10,17,9,13,12,9,7,19,2,9,12,11,9,13,12,12,12,13,11,32,8,10,9,7,12,7,3,12,12,7,9,13,13,13,11,10,16,35,7,36,10,12,22,24,12,12,9,9,54,24,10,9,13,13,5,18,12,13,10,11,7,11,7,11,8,4,6,13,10,9,11,12,10,19,21,12,5,12,11,13,21,13,13,18,28,21,17,9,12,5,12,39,24,10,12,12,17,13,10,11,7,8,5,10,18,12,12,8,12,9,14,9,13,25,9,17,23,12,12,10,12,12,11,4,11,20,8,2,12,13,12,13,12,7,21,21,13,12,9,9,8,11,22,10,21,13,12,10,6,11,7,12,12,17,19,27,10,10,12,10,6,10,24,13,20,13,7,7,29,12,10,12,30,13,10,12,28,11,9,14,9,11,15,12,12,7,10,13,9,6,11,11,26,12,12,12,10,6,7,6,13,11,12,12,13,9,11,2,12,13,18,8,10,10,7,12,9,11,10,21,22,8,11,6,16,7,7,12,7,32,9,11,23,12,12,25,11,7,11,12,7,8,17,9,21,11,10,12,13,22,20,7,13,22,8,3,13,12,8,3,10,36,6,13,19,10,12,9,17,15,31,9,10,12,7,35,12,17,16,10,10,12,11,12,11,9,10,12,13,13,5,16,7,13,9,24,12,13,4,11,17,11,9,17,9,10,12,13,7,16,8,11,7,10,19,10,13,21,12,7,12,8,2,13,11,12,12,12,3,6,10,2,12,8,12,9,14,11,12,12,13,11],"type":"box","name":"QUEENS","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"line":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","y":[19,12,26,9,68,10,19,13,14,10,13,10,8,9,7,11,12,12,10,28,5,15,12,5,12,21,12,3,13,11,10,20,11,12,13,12,7,12,13,12,20,10,12,23,12,28,12,11,13,28,10,24,2,12,13,8,10,24,15,9,26,7,40,4,5,7,13,12,11,16,11,9,13,3,12,11,12,12,4,12,13,13,11,11,7,48,20,12,12,11,13,12,22,13,13,19,29,12,12,11,12,12,7,10,10,10,44,12,11,10,13,10,12,7,9,5,12,12,12,11,19,23,12,12,7,9,12,10,23,9,13,31,12,19,10,11,10,23,12,12,12,13,27,22,29,12,34,11,7,12,7,25,6,13,21,12,9,13,9,5,12,18,12,10,11,11,12,9,9,9,9,10,9,9,9,12,12,21,12,10,13,10,11,12,7,12,26,11,13,31,6,12,13,11,7,9,8,7,11,10,11,13,9,39,12,12,21,13,25,13,11,8,9,13,13,12,13,7,27,12,8,25,7,25,12,4,12,12,10,5,2,10,12,13,7,9,12,10,48,13,10,4,21,13,18,13,6,12,12,18,10,7,37,28,9,13,14,9,10,39,8,7,12,11,12,12,10,11,13,12,12,12,18,10,7,13,13,44,11,9,28,12,13,12,13,8,12,12,12,39,10,13,13,10,18,10,13,11,12,10,8,7,9,7,12,9,7,12,26,12,9,13,13,10,13,12,9,7,13,7,13,9,13,13,12,9,24,9,9,7,20,18,10,11,7,14,12,10,20,13,12,10,20,10,15,18,12,12,18],"type":"box","name":"STATEN ISLAND","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d088b7f9a640e3f97e7f" style="width:576px;height:460.8px;"></div>
+<script type="application/json" data-for="htmlwidget-d088b7f9a640e3f97e7f">{"x":{"visdat":{"b310438bc4b6":["function () ","plotlyVisDat"]},"cur_data":"b310438bc4b6","attrs":{"b310438bc4b6":{"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Borough"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Score"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","y":[9,13,22,11,27,10,10,11,5,10,13,9,21,9,13,12,2,19,3,12,9,9,9,10,9,9,4,12,7,8,9,10,17,10,12,12,7,21,19,10,12,4,25,24,17,20,7,9,75,12,6,28,12,13,11,12,7,10,11,7,10,10,22,11,64,11,21,13,11,10,13,19,10,12,15,12,7,11,13,9,7,10,12,10,10,10,7,2,12,7,12,12,12,13,13,9,2,5,23,11,12,8,6,10,10,4,13,10,7,12,10,12,10,12,11,10,7,6,21,13,9,4,11,7,15,13,10,6,33,23,11,10,10,12,9,12,18,12,13,47,2,9,6,25,10,12,12,8,9,8,7,12,12,13,12,9,9,12,18,11,7,17,13,11,9,19,13,10,12,11,9,7,2,7,11,3,7,9,11,14,7,12,7,7,3,20,11,7,4,13,10,24,11,23,13,18,9,2,29,12,10,26,20,29,4,9,38,4,5,13,12,10,5,7,13,11,8,10,25,13,13,19,10,14,7,19,11,26,6,21,10,22,11,10,9,11,15,4,9,44,10,12,11,11,2,11,9,12,13,19,11,6,21,12,11,23,10,7,12,40,7,12,10,4,9,13,2,24,13,24,13,20,12,21,8,10,12,12,12,12,12,11,13,12,13,13,13,12,11,19,12,5,26,12,11,12,11,11,8,9,4,10,13,12,11,25,2,7,27,8,7,22,13,10,9,10,52,11,12,13,8,13,2,10,12,14,11,11,12,11,9,12,6,9,13,7,12,12,14,20,8,12,11,12,7,25,12,11,11,9,7,9,12,5,11,10,12,13,6,9,13,7,10,9,12,9,17,11,7,9,11,13,7,23,24,8,19,12,22,10,5,9,4,33,11,7,11,7,22,17,9,9,14,7,11,12,11,12,13,7,10,6,27,5,12,8,10,13,13,11,11,8,12,43,17,9,11,11,16,11,11,9,12,5,19,26,10,13,12,11,19,11,13,14,7,19,12,13,6,9,12,7,8,12,13,11,51,10,10,11,12,23,13,12,3,28,20,8,9,20,24,10,11,11,13,12,11,11,13,9,13,7,10,12,11,3,12,14,7,10,9,9,12,8,12,11,3,12,12,9,8,18,11,13,12,13,18,7,9,9,27,33,27,27,10,24,7,63,26,12,10,3,19,12,4,13,13,12,27,11,5,12,10,2,5,13,12,19,19,7,12,53,20,12,16,7,11,13,56,10,9,29,9,10,11,11,11,8,26,12,23,11,20,7,13,5,56,7,53,19,9,12,11,9,9,2,14,7,7,12,13,13,7,25,23,11,7,19,12,7,7,12,9,11,2,7,12,15,30,12,18,13,25,10,6,27,10,10,8,12,2,12,11,23,9,6,9,12,12,5,35,8,10,10,13,13,25,18,4,13,12,9,13,12,17,19,22,12,5,13,22,12,3,9,12,10,5,5,13,24,7,12,12,13,10,12,3,24,12,9,6,11,12,28,12,11,4,12,12,10,7,25,4,9,8,2,5,34,48,7,22,44,12,21,16,7,10,12,27,23,13,13,32,10,13,28,11,4,4,9,19,47,6,12,16,13,25,11,26,13,56,5,5,10,12,30,18,9,23,9,9,13,18,10,12,35,12,35,12,12,10,15,5,13,10,19,18,13,8,7,12,9,9,3,11,10,5,9,12,9,12,32,11,7,9,4,11,9,6,13,12,9,9,11,7,27,13,22,10,11,11,9,11,10,17,8,10,8,7,7,12,11,9,13,13,10,7,10,22,11,24,2,10,6,9,14,7,9,30,6,2,12,24,11,2,10,21,13,5,32,10,12,28,8,7,13,17,12,12,9,3,2,12,11,13,9,4,17,12,11,8,20,14,4,26,10,10,24,9,9,10,12,10,9,9,7,13,21,6,9,13,12,20,7,13,15,7,8,12,9,11,8,12,12,56,22,8,9,12,13,27,21,26,7,12,27,28,26,12,12,12,4,10,13,31,9,9,11,12,13,18,4,40,11,31,12,16,12,11,11,13,7,12,10,12,12,5,43],"type":"box","name":"BRONX","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(59,82,139,0.5)","y":[10,12,12,26,12,19,10,9,12,32,9,12,16,9,4,13,11,13,26,10,11,13,11,12,13,8,7,13,11,9,8,13,10,26,18,8,10,22,12,12,8,13,25,12,12,8,3,12,9,10,5,13,12,11,10,12,10,5,13,43,11,13,19,10,22,10,10,12,7,27,12,10,27,12,11,12,9,10,13,13,19,9,9,11,10,12,11,13,12,10,37,10,10,7,9,7,20,11,21,10,18,8,8,12,5,4,9,13,12,6,9,9,13,11,12,12,11,19,40,12,10,21,12,20,7,10,7,13,21,12,5,18,18,11,10,7,10,15,11,11,7,11,7,12,27,19,26,9,12,9,25,12,12,3,9,15,10,11,8,7,10,10,13,7,2,13,11,10,11,24,30,4,24,10,22,7,12,15,9,13,19,12,13,13,13,9,7,11,2,26,3,8,7,7,10,19,7,18,10,5,11,10,5,10,10,10,7,4,10,20,7,13,9,7,43,17,13,9,12,9,12,2,2,12,13,16,6,9,23,4,13,7,7,19,13,12,10,13,12,11,6,11,13,13,19,12,12,11,11,11,7,19,12,18,30,13,11,18,11,12,12,10,3,17,13,5,28,11,3,10,9,8,4,7,12,12,13,12,10,7,12,26,6,9,12,12,15,9,9,4,7,12,13,10,12,12,10,7,10,2,12,11,8,12,7,7,10,2,13,13,12,10,9,18,10,5,10,27,8,10,12,20,12,10,10,8,12,10,13,14,45,34,3,12,21,7,12,10,10,11,9,12,12,13,13,2,13,11,12,7,5,9,13,9,13,13,13,13,6,9,10,7,17,5,8,26,23,13,7,5,2,12,13,12,11,26,9,8,7,14,13,9,2,27,10,11,10,32,9,9,10,13,7,12,30,12,13,13,7,11,13,11,27,10,13,9,9,12,23,37,10,11,12,27,26,20,13,8,17,12,13,8,8,7,7,5,2,12,2,7,12,9,7,14,13,11,10,12,13,9,37,4,13,12,20,13,8,20,7,10,5,18,8,10,2,12,11,7,12,11,11,9,26,12,8,13,12,9,10,9,13,7,13,8,13,10,12,9,9,20,12,11,13,12,8,13,11,7,11,5,10,10,12,21,7,13,10,13,10,13,11,11,11,10,31,19,12,13,18,12,5,10,11,9,3,19,12,13,13,12,51,7,12,7,8,13,13,7,7,8,20,12,11,4,5,4,8,13,10,31,5,20,11,8,12,11,11,13,10,12,12,20,12,12,12,11,7,31,11,12,22,2,13,10,2,10,24,9,13,22,13,12,12,25,10,17,12,11,61,13,11,9,13,3,38,3,32,19,7,7,27,11,9,13,9,3,5,9,9,9,7,61,11,12,11,10,28,12,9,13,12,11,21,6,10,10,2,12,5,9,9,22,4,10,2,10,11,10,9,22,11,19,13,20,24,11,17,5,8,7,9,2,6,27,8,7,9,9,12,54,6,13,10,5,8,33,11,22,13,11,2,12,32,56,11,81,8,12,10,13,5,31,6,11,9,10,17,7,10,19,12,25,18,9,8,12,10,7,7,10,8,2,12,19,13,12,17,19,2,8,7,11,18,19,11,24,10,13,22,7,9,12,11,10,7,13,10,13,25,13,9,11,13,22,24,13,10,20,8,19,10,13,12,9,3,7,12,13,5,16,24,10,11,8,13,9,17,25,11,13,10,13,9,7,9,19,13,9,7,6,38,13,13,37,9,11,12,12,37,12,12,12,13,17,35,9,10,12,8,9,22,13,7,12,7,8,8,12,9,26,10,11,6,10,9,10,7,27,26,10,10,13,9,13,10,11,7,10,10,10,11,7,11,14,5,7,7,7,2,11,12,5,5,12,12,15,12,12,7,12,10,17,8,9,7,12,30,31,24,7,24,9,30,9,11,23,11,12,13,7,7,13,7,10,9,2,10,5,18,18,17,12,12,9,33,10,13,11,12,12,17,27,13,9,11,10,13,9,47,13,7,5,13,9,27,12,13,26,12,12,13,9,7,20,4,32,26,13,27,8,10,8,12,9,7,11,9,12,13,10,9,12,9,13,7,10,19,18,18,9,12,11,13,11,10,10,13,50,10,10,12,23,12,22,13,8,8,13,19,12,7,12,10,11,2,10,9,8,12,7,25,5,12,10,9,9,11,8,13,10,9,10,13,11,12,7,10,12,12,5,7,9,7,13,12,18,17,9,13,9,13,12,12,10,9,12,24,13,10,9,8,6,42,12,8,12,9,4,12,26,12,12,7,12,13,8,13,7,14,7,10,7,20,12,11,12,12,9,22,60,12,19,13,10,7,22,5,38,13,12,21,6,26,11,13,16,13,9,12,10,8,13,12,12,7,11,12,5,13,10,12,10,11,5,7,10,18,12,11,12,9,24,10,10,13,12,10,43,12,18,12,16,13,12,9,13,12,5,10,2,55,11,38,21,9,11,12,18,3,5,9,7,12,19,12,6,12,12,12,13,21,27,18,8,13,11,8,11,11,13,12,7,11,5,13,13,17,20,6,16,20,9,10,12,12,9,4,10,2,12,7,12,14,12,4,13,10,26,12,7,13,10,2,7,7,12,10,12,12,6,52,24,12,24,12,11,24,10,10,10,13,8,11,16,12,16,9,8,10,9,4,13,10,12,3,12,13,12,10,61,7,10,29,11,21,12,12,13,10,12,9,8,12,13,12,11,13,7,27,12,20,12,7,9,5,10,7,13,9,12,20,12,8,13,12,13,11,13,5,8,12,17,13,11,9,46,4,18,12,19,6,21,18,12,13,17,12,18,15,13,12,11,27,12,12,26,4,9,12,12,12,39,13,2,13,10,13,9,2,12,12,14,7,11,7,14,10,17,26,13,17,11,9,44,11,9,11,6,9,13,7,23,10,12,7,12,23,3,24,3,11,2,11,10,10,9,12,7,9,10,42,9,12,11,28,2,10,11,26,13,11,10,9,24,13,13,10,10,13,10,12,13,12,23,12,3,12,12,13,4,12,5,26,3,12,8,10,19,2,9,18,12,13,9,12,10,12,13,12,12,12,10,10,13,10,4,11,9,29,15,13,13,12,5,13,7,13,10,9,12,10,9,11,18,4,5,3,5,7,12,13,9,24,7,20,21,4,9,24,12,5,9,25,21,11,7,18,12,20,12,7,21,11,20,9,8,13,22,7,20,7,11,10,7,10,12,8,9,25,13,11,10,17,13,12,12,11,10,3,27,11,13,27,12,7,13,18,27,29,12,9,24,2,8,10,7,2,8,8,23,12,9,10,8,7,23,10,25,10,13,12,7,13,9,13,13,18,26,8,4,9,12,13,11,19,40,11,19,11,27,13,21,13,13,15,9,12,12,11,2,11,18,12,10,14,6,7,11,12,2,16,9,27,12,16,11,12,10,25,9,12,25,12,13,13,12,13,2,11,7,10,23,5,33,11,7,5,9,11,13,12,12,7,9,12,13,7,13,12,7,10,10,12,10,10,4,55,12,11,12,11,7,9,11,12,13,8,9,49,11,9,11,13,11,9,26,12,14,12,12,9,9,13,9,22,10,9,12,9,13,12,33,9,13,13,12,13,12,12,13,12,10,24,15,11,10,13,12,12,17,13,7,2,11,12,13,4,12,16,12,11,13,23,14,20,8,10,12,7,2,7,11,20,12,10,13,13,21,37,7,10,12,15,13,10,12,11,25,22,7,18,11,12,11,10,5,12,12,7,13,12,2,27,10,33,12,19,12,9,9,7,8,13,9,8,16,23,10,13,13,6,19,4,8,7,8,7,9,13,12,10,2,5,7,27,13,10,12,10,12,7,19,8,11,13,7,12,9,7,22,25,13,8,12,9,4,13,12,11,7,14,5,34,9,86,13,12,5,9,13,12,11,20,27,9,24,13,12,10,4,12,7,12,9,8,10,26,7,11,7,13,5,12,9,13,19,12,26,12,22,3,20,4,16,12,8,10,19,21,12,7,18,9,9,13,8,10,9,16,10,10,13,13,8,25,11,32,13,10,7,6,7,10,4,4,6,9,12,10,10,9,12,23,13,12,25,13,15,2,14,10,26,9,11,14,12,9,11,13,15,12,10,7,7,12,16,6,12,21,12,13,10,10,9,13,9,12,5,11,11,12,7,10,9,12,13,12,12,7,11,10,13,3,9,10,20,8,6,39,15,6,21,4,11,13,11,13,17,13,11,10,12,13,11,5,12,12,9,17,12,8,15,12,11,16,5,7,7,13,7,27,10,12,12,10,24,11,21,8,23,12,9,10,11,12,5,3,19,11,11,11,2,3,8,14,12,11,12,13,11,13,7,11,11,27,12,12,12,7,13,12,12,5,11,12,59,7,7,10,13,5,12,10,11,5,11,12,11,19,2,12,5,21,20,12,13,10,27,10,9,12,9,9,12,27,12,12,10,12,13,10,10,11,12,10,12,10,20,32,23,7,12,12,10,13,12,12,9,73,12,19,13,16,12,7,10,13,73,2,13,12,12,10,9,13,21,10,11,9,13,13,7,11,25,17,10,10,12,11,8,7,11,6,12,13,11,13,12,23,12,9,12,14,7,25,7,19,15,27,2,11,13,2,9,11,12,13,24,9,18,13,13,13,9,32,13,10,13,7,6,24,12,12,13,13,13,13,2,7,13,13,11,8,13,7,12,13,7,27,7,19,7,9,13,10,11,9,32,11,13,10,9,17,12,27,11,9,20,7,48,8,12,9,4,9,12,7,10,12,7,9,21,7,15,9,9,4,19,38,9,12,13,17,13,9,20,7,26,4,5,11,19,13,11,11,13,19,12,9,12,13,2,10,7,27,9,12,11,4,13,17,12,9,13,11,12,12,7,12,10,10,12,24,8,13,12,24,10,12,15,12,11,18,12,13,8,10,12,21,5,20,11,13,9,11,16,5,12,15,9,13,7,18,12,9,13,20,13,6,19,12,11,12,12,8,13,2,7,5,8,20,11,3,21,12,3,13,13,12,8,19,50,12,10,13,12,9,11,12,7,25,11,2,7,12,18,13,7,21,10,9,17,11,9,18,7,13,43,12,36,9,9,15,11,11,13,12,17,5,12,7,13,14,25,10,4,12,10,6,9,26,9,4,13,9,9,4,9,7,14,23,17,19,23,4,7,12,12,8,13,7,13,10,20,9,7,12,11,12,11,12,12,10,9,13,12,4,7,11,11,16,7,2,26,7,13,18,11,20,12,12,12,7,24,13,8,14,17,10,21,12,7,10,7,13,12,9,12,9,11,10,14,11,13,12,10,10,7,11,27,9,9,7,13,9,10,13,9,9,17,11,4,9,25,13,12,13,8,4,7,11,19,12,13,11,7,12,26,9,12,10,12,7,5,27,13,12,6,9,12,11],"type":"box","name":"BROOKLYN","marker":{"color":"rgba(59,82,139,1)","line":{"color":"rgba(59,82,139,1)"}},"line":{"color":"rgba(59,82,139,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(33,144,141,0.5)","y":[12,11,9,48,13,13,10,23,10,63,8,26,7,12,10,26,13,3,8,5,12,13,13,7,10,7,13,17,21,24,12,5,19,11,12,42,9,22,9,9,9,13,9,2,4,13,5,7,8,9,12,18,10,12,7,10,12,9,12,17,8,8,9,13,13,11,10,13,12,11,11,12,11,35,11,9,19,9,13,12,9,10,13,10,12,12,2,14,10,11,13,2,12,44,12,12,7,5,4,11,25,11,12,12,11,7,18,11,10,7,10,5,29,10,11,9,26,12,9,12,15,5,8,12,9,19,8,13,13,11,10,33,42,46,7,8,13,11,12,11,13,10,7,8,10,11,2,27,24,4,23,9,11,7,6,26,25,10,7,11,11,7,13,4,12,9,21,20,13,13,12,26,13,12,10,13,24,9,12,11,11,12,18,2,62,9,12,12,12,11,8,7,13,12,12,5,6,26,11,14,9,12,14,10,7,11,7,10,24,15,11,18,7,12,12,11,6,9,10,39,12,13,9,13,11,6,7,2,12,13,9,4,12,10,10,15,10,9,9,7,12,12,11,13,12,7,13,13,18,7,26,11,20,10,30,8,7,25,12,10,23,12,13,12,13,12,10,7,11,12,13,11,23,11,13,12,9,12,13,8,13,5,9,13,13,9,16,34,16,10,10,13,8,12,25,7,13,9,16,12,10,2,10,14,3,27,4,11,27,2,13,10,10,3,3,12,13,12,12,20,17,10,11,9,2,7,7,13,10,12,17,10,21,2,16,12,25,20,14,10,12,12,2,27,10,10,12,13,12,13,7,11,28,21,12,12,7,11,25,12,20,20,2,2,17,4,12,13,12,40,12,16,13,12,23,12,9,5,12,5,17,9,13,12,2,18,9,20,7,17,10,12,13,6,12,16,11,18,14,13,10,13,9,13,12,10,13,16,12,12,12,12,12,46,9,10,23,26,20,12,18,12,27,10,5,4,11,13,17,9,7,12,12,26,15,13,12,12,13,13,8,7,2,7,12,8,7,9,8,27,14,7,11,9,11,10,12,12,12,35,10,12,12,9,10,4,11,12,13,17,9,26,11,13,24,27,21,9,21,10,32,13,7,23,10,10,2,10,9,26,12,13,12,36,9,7,11,13,35,7,20,6,10,7,24,20,11,9,11,12,10,9,12,2,12,13,12,12,11,12,27,16,9,13,16,11,7,10,12,20,11,23,9,12,4,12,13,25,9,9,10,15,18,11,13,9,22,13,9,8,7,15,13,6,13,13,16,47,15,18,13,9,10,13,13,20,7,9,9,13,4,8,3,12,12,13,10,9,29,12,11,11,12,40,7,11,11,4,10,9,10,18,14,10,8,12,26,9,6,8,12,10,10,12,11,12,16,11,12,11,12,10,12,9,20,11,13,10,13,11,13,13,12,12,9,9,13,12,12,9,34,12,13,12,11,11,9,11,13,12,7,7,21,36,24,9,12,8,12,12,12,11,21,7,7,11,8,23,7,10,7,13,11,9,11,24,16,11,3,11,12,8,9,11,11,11,9,7,16,13,12,12,12,13,7,7,8,23,7,13,13,13,12,11,10,12,10,27,7,12,12,29,12,9,13,11,13,35,14,9,13,13,12,48,12,13,9,10,8,12,8,23,4,6,3,11,10,7,25,12,18,11,12,10,12,12,11,7,8,8,33,11,11,22,10,12,12,7,6,24,11,13,12,7,13,10,25,4,11,12,12,4,11,30,13,8,11,15,10,11,11,12,22,10,24,17,12,42,11,8,8,14,11,7,8,19,12,6,11,11,20,9,9,23,7,12,9,8,24,22,78,10,2,9,7,19,4,10,12,19,7,9,10,2,11,32,15,10,19,12,2,7,4,31,22,23,12,9,13,9,13,11,24,13,19,9,10,13,25,13,9,13,18,13,8,7,12,13,32,10,13,7,11,23,22,12,13,20,8,9,10,10,2,23,12,17,12,13,22,7,9,2,11,11,12,13,12,7,12,10,12,18,11,12,13,7,12,12,12,15,12,27,15,7,12,5,11,10,7,13,2,13,9,12,27,12,12,11,10,2,30,11,11,12,17,25,11,12,21,13,12,13,12,12,27,12,11,10,9,11,7,10,10,11,11,11,11,16,11,11,11,12,12,8,7,8,17,6,46,12,5,16,13,13,25,40,10,27,13,9,10,6,10,10,16,2,11,13,9,12,15,13,11,9,8,9,12,25,13,11,48,65,18,12,9,8,13,7,8,11,13,9,30,18,11,34,10,9,7,12,10,8,26,19,10,13,20,10,17,12,7,21,3,7,5,10,17,2,11,13,23,4,9,2,12,11,37,11,10,7,17,11,7,10,11,7,18,12,23,24,50,12,23,4,13,13,13,3,12,12,11,13,2,12,26,40,43,16,9,18,13,13,12,24,15,9,9,13,9,12,13,10,23,11,26,20,12,7,12,10,13,11,10,12,12,5,13,13,2,10,7,13,13,11,12,6,18,10,7,12,7,9,13,13,24,12,10,11,9,9,7,24,11,12,7,13,7,22,12,9,7,56,9,25,9,9,9,13,12,2,11,10,12,13,13,7,7,13,25,26,11,12,10,12,2,10,10,12,7,9,13,53,10,12,7,24,13,11,12,13,12,7,24,11,10,18,26,10,11,11,12,23,12,13,26,13,9,13,12,11,12,24,19,7,30,11,9,6,13,13,19,7,12,7,12,10,9,12,13,12,10,13,13,11,21,9,25,9,13,21,12,13,9,10,7,13,4,9,7,8,11,8,38,25,10,20,13,2,23,12,9,9,12,8,13,10,12,18,4,12,13,7,12,4,10,11,13,8,7,11,12,24,7,11,9,9,7,9,25,8,9,7,12,9,24,22,52,25,13,7,7,4,5,10,10,28,11,10,12,13,7,5,4,9,2,8,12,12,9,10,7,9,12,11,18,11,11,2,5,12,12,12,13,13,13,7,10,12,11,5,8,20,9,12,3,9,12,9,12,12,12,13,46,20,13,11,12,10,12,10,9,13,11,22,11,4,5,10,4,13,3,13,10,10,2,18,12,13,4,11,12,9,2,11,5,13,10,7,26,9,12,11,19,3,9,12,23,12,5,10,15,13,11,12,8,13,10,27,9,14,19,9,13,7,3,13,9,12,27,12,4,8,7,4,13,13,12,11,9,12,12,13,10,13,13,2,7,11,6,9,23,13,13,7,23,12,13,28,2,13,13,13,19,9,12,25,4,6,5,12,27,4,12,21,12,12,11,5,9,12,11,6,12,11,11,6,11,7,12,7,27,11,13,10,12,11,10,9,12,21,33,12,11,11,13,12,12,23,12,13,9,7,12,14,10,12,31,13,20,5,12,13,13,11,12,7,13,7,12,12,7,12,22,12,13,5,27,2,10,8,10,12,7,2,27,4,13,13,41,11,9,13,35,12,5,11,20,12,19,4,17,9,4,19,2,8,12,10,4,10,15,12,7,13,13,13,12,25,7,7,13,12,9,10,13,10,26,10,9,13,23,10,10,5,7,12,17,26,13,26,12,12,12,18,13,13,2,9,12,11,13,27,29,13,5,16,8,13,7,35,10,12,22,8,3,11,7,11,7,9,21,10,13,5,12,12,12,11,12,12,2,12,12,10,10,10,9,11,7,16,10,7,13,9,13,7,10,13,11,9,12,12,2,19,10,12,11,12,12,13,8,7,11,6,7,6,25,14,11,23,26,10,2,13,3,11,8,12,10,4,12,12,8,9,13,13,11,12,17,10,8,12,23,12,12,10,20,10,12,12,9,13,4,24,14,12,11,11,23,12,25,11,9,12,25,16,9,9,12,11,10,13,12,7,12,13,7,13,9,6,13,14,33,12,8,10,7,38,7,11,10,20,12,2,7,9,8,5,10,26,6,12,63,12,13,7,9,12,22,13,13,17,24,19,10,13,11,10,11,12,7,12,14,21,7,12,10,4,12,10,11,12,10,11,13,2,11,12,7,11,3,7,22,12,11,50,12,10,12,10,12,17,9,9,17,7,12,15,12,12,17,12,11,37,11,23,11,13,17,9,12,13,10,17,11,8,2,9,12,11,4,15,11,7,9,23,12,3,3,10,7,10,22,10,9,12,12,13,9,13,10,15,26,11,9,9,12,11,13,13,24,4,7,11,11,12,9,19,9,12,11,26,8,8,9,7,7,9,4,11,12,13,5,10,37,7,9,5,4,8,11,10,10,12,10,13,9,10,12,5,9,9,5,13,9,27,30,10,12,15,47,10,5,41,15,8,9,11,12,34,14,9,9,15,4,9,24,2,13,12,12,9,21,20,10,12,9,7,9,7,7,10,9,12,11,13,26,9,12,25,12,13,13,36,2,8,2,9,13,9,9,23,2,26,12,9,26,5,5,11,7,15,7,12,6,10,12,21,9,12,12,2,8,12,12,12,13,6,12,12,17,23,9,10,7,9,3,3,10,10,13,9,7,19,23,12,13,11,6,10,10,7,11,9,2,29,6,9,13,7,12,12,9,25,27,8,12,10,7,9,9,26,3,19,5,4,9,8,10,12,12,12,12,12,37,25,10,12,11,10,12,8,13,12,11,13,48,9,12,9,13,7,11,13,7,12,13,12,8,26,11,7,9,11,9,12,2,12,13,13,5,11,7,9,5,14,11,10,14,9,32,7,13,10,10,13,13,13,10,12,4,9,4,12,17,10,10,7,10,12,14,9,2,18,12,11,9,13,9,12,12,10,30,22,12,7,11,17,3,7,30,12,3,12,10,7,5,12,9,7,11,12,12,12,12,7,5,21,11,5,18,10,27,21,12,5,10,9,9,10,13,18,12,20,5,10,12,10,9,7,10,12,11,10,2,18,13,2,7,13,9,5,20,13,7,8,7,10,3,10,12,12,12,17,17,9,7,12,12,24,18,21,11,12,12,13,9,13,7,12,13,8,12,12,6,47,11,10,11,11,25,13,4,12,13,11,12,12,12,13,7,12,4,48,25,10,10,9,11,13,20,13,17,13,31,12,11,12,21,9,13,8,9,3,5,19,8,10,5,9,4,6,11,25,7,4,12,13,17,13,10,11,13,7,30,10,29,3,7,10,8,9,19,11,22,10,9,11,11,9,8,26,11,13,8,12,22,22,12,38,7,12,12,19,5,9,27,48,21,10,12,12,8,10,4,13,7,9,4,7,12,7,10,32,5,15,4,12,13,8,2,12,12,10,8,13,8,2,12,12,12,9,13,9,12,9,5,10,26,10,14,11,9,9,38,26,26,8,9,26,7,10,10,10,11,13,9,9,10,24,13,8,13,12,11,6,18,13,2,15,26,2,12,11,9,27,12,5,7,13,18,2,12,10,7,9,13,11,11,9,7,12,10,7,11,12,12,11,7,10,11,13,9,12,10,10,11,12,33,13,12,11,13,10,12,13,12,12,12,29,45,13,12,13,11,12,12,2,13,12,9,4,8,13,7,5,12,10,13,13,22,13,5,11,32,13,13,11,9,12,9,12,11,11,13,9,13,12,11,11,63,15,13,9,13,7,27,11,18,13,13,23,7,12,16,13,11,12,16,9,11,19,9,12,12,25,12,8,15,45,12,10,9,9,12,12,7,7,8,2,9,11,5,5,8,7,12,14,13,13,17,11,13,13,12,27,18,10,5,24,8,11,30,12,9,8,4,13,11,13,20,7,10,10,5,27,11,9,24,38,10,17,9,10,2,12,21,12,13,13,7,10,5,22,12,13,10,9,19,11,5,13,7,12,3,10,19,26,13,10,10,12,12,12,24,10,12,12,9,12,25,27,10,10,10,11,4,13,17,10,11,13,15,9,17,7,13,12,10,8,8,12,7,13,2,7,40,7,12,11,12,10,12,12,13,7,11,10,10,10,13,11,13,13,9,16,12,7,8,12,2,9,12,5,12,12,2,7,3,9,10,10,13,12,25,7,8,27,13,12,5,19,12,9,16,9,10,12,5,37,12,9,27,5,16,12,9,11,13,12,13,5,9,12,9,8,23,18,13,4,13,4,20,3,8,12,13,7,9,23,10,5,10,12,21,12,12,20,12,10,12,12,21,4,25,9,9,4,7,13,9,6,3,9,11,11,7,11,13,30,23,9,35,9,24,13,8,7,9,17,6,11,7,12,6,9,26,12,13,12,5,10,22,22,20,22,26,7,13,4,10,13,12,9,2,13,10,9,11,18,26,7,22,10,34,27,10,10,7,12,12,9,12,9,10,10,3,12,16,9,7,12,11,26,12,12,12,12,15,9,9,10,8,12,9,27,10,13,13,11,23,13,15,9,22,10,9,7,12,2,4,16,37,12,7,16,10,12,15,10,10,4,13,11,12,12,12,13,11,18,8,11,12,11,7,11,10,10,7,12,7,16,12,10,28,9,12,24,10,12,19,17,10,11,7,10,12,12,14,6,2,12,11,19,11,12,13,10,7,8,30,2,9,11,14,9,14,13,11,7,12,5,9,10,13,12,13,12,9,9,11,16,7,9,9,9,12,10,12,12,7,12,20,37,13,12,13,11,9,10,11,12,14,8,6,9,11,9,13,7,13,7,2,4,12,8,9,26,12,20,12,20,5,13,7,11,24,9,12,6,13,9,12,11,12,4,12,12,18,10,10,13,9,13,10,12,11,20,24,13,38,42,10,13,37,24,12,27,13,9,12,9,11,9,12,12,18,11,13,13,25,10,9,11,11,22,7,11,12,7,12,4,12,9,10,26,12,7,9,9,11,12,7,36,12,12,11,10,10,12,8,8,22,12,13,13,17,15,20,15,12,28,18,12,6,10,19,16,9,7,11,13,6,12,10,11,21,7,22,17,10,11,12,12,4,10,11,12,2,17,4,13,11,11,11,22,12,26,13,10,13,26,9,7,13,18,12,4,37,12,10,13,44,7,21,12,3,16,10,13,9,7,8,3,9,12,7,2,13,7,12,11,9,14,10,25,11,10,9,12,7,2,12,2,26,6,17,4,11,8,5,12,27,12,12,6,9,13,8,4,10,7,13,12,27,12,7,22,10,12,10,13,9,13,9,24,10,24,17,12,12,10,11,2,13,12,24,12,5,12,12,11,12,10,7,12,13,17,11,8,6,9,7,12,9,11,23,12,9,10,9,12,9,27,9,21,8,2,5,22,13,27,10,9,10,9,9,12,45,19,8,10,10,11,9,7,6,12,10,10,63,12,10,26,22,7,10,13,12,10,11,9,10,7,11,9,7,13,12,7,12,5,2,12,12,7,13,9,11,7,8,10,10,7,10,7,8,11,16,7,9,8,12,7,16,20,13,11,13,13,32,5,13,12,18,11,16,4,5,17,7,32,12,10,7,13,11,6,10,40,4,8,12,9,6,12,9,13,13,13,36,8,10,9,11,11,11,17,2,12,13,10,12,9,7,12,12,5,12,8,12,9,18,9,12,13,12,12,7,9,5,15,20,12,9,13,7,15,4,10,10,12,24,29,26,3,13,13,10,6,10,7,12,11,9,9,9,2,7,5,12,10,12,23,4,5,13,22,12,13,7,12,7,24,7,13,10,9,13,6,19,7,25,7,12,12,9,10,9,56,9,8,12,10,21,4,11,27,9,9,10,13,10,12,13,26,13,11,23,15,11,39,7,16,25,26,13,12,13,11,12,9,3,10,10,8,23,8,14,12,8,11,13,10,24,11,11,10,11,12,2,8,11,9,11,18,25,13,11,9,5,9,12,10,20,12,9,7,11,9,5,16,10,11,16,11,10,7,11,22,13,7,7,9,3,27,22,26,12,22,12,14,7,7,13,18,12,13,13,30,9,12,4,13,11,8,10,24,10,12,11,13,8,12,6,13,10,12,7,9,38,22,11,4,9,5,9,7,9,12,13,12,5,10,21,13,7,10,9,12,27,12,11,17,12,9,12,13,27,13,9,13,12,10,12,10,12,10,11,12,12,10,10,2,16,14,12,12,12,6,12,9,12,26,8,13,12,2,10,10,7,9,9,11,30,9,10,5,9,27,10,10,8,12,18,9,10,10,9,13,12,12,13,11,10,15,11,13,7,13,10,11,12,8,13,13,10,11,11,10,7,31,3,12,20,17,2,12,13,7,10,10,13,5,13,4,8,12,8,13,13,34,12,11,11,12,9,10,12,9,12,10,12,10,13,11,13,21,11,12,12,15,9,7,11,7,9,13,8,10,8,27,7,13,19,7,12,13,26,10,9,12,10,8,13,12,10,8,6,13,7,11,26,23,8,7,10,12,13,7,13,23,5,7,21,10,10,3,22,5,44,12,9,23,13,25,12,12,11,12,5,9,12,8,11,10,11,10,10,11,16,4,7,7,11,3,10,12,25,8,13,12,4,2,12,4,10,10,5,7,10,11,10,4,9,2,12,13,10,12,21,14,12,10,4,15,13,13,10,10,12,12,25,10,10,4,12,12,10,10,7,25,11,10,8,13,11,7,8,11,13,12,5,10,12,7,12,2,7,20,12,10,12,12,17,12,10,13,13,2,37,7,8,13,7,41,12,13,23,13,12,10,7,12,7,13,10,4,7,16,10,9,2,26,20,11,13,10,12,13,9,7,12,8,12,13,13,12,13,15,13,9,13,11,7,12,4,12,7,13,3,12,12,11,13,12,7,6,9,9,40,11,11,9,2,12,13,10,13,12,12,9,11,10,20,9,9,9,26,10,10,9,10,18,13,13,5,12,7,13,17,9,11,10,7,20,20,11,10,9,7,10,30,12,3,7,12,7,11,13,33,12,23,10,5,13,10,13,26,4,13,7,14,19,12,11,9,13,2,13,10,11,9,20,12,12,11,12,2,11,25,10,13,12,13,6,12,12,18,13,12,5,12,5,7,12,9,12,32,27,8,9,5,6,12,13,11,3,13,8,5,26,16,20,29,12,11,9,13,3,13,8,13,13,10,5,25,9,9,6,13,12,12,15,13,24,10,18,11,8,10,10,10,17,2,2,11,11,12,12,11,13,13,27,11,10,12,12,12,10,9,11,13,15,8,20,10,10,12,27,12,12,13,24,9,12,9,22,12,25,9,10,13,13,3,10,11,13,13,25],"type":"box","name":"MANHATTAN","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"line":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(93,200,99,0.5)","y":[10,11,19,12,15,12,7,10,12,12,13,13,6,12,11,9,11,7,7,11,9,10,25,12,50,20,3,4,7,12,13,13,9,9,21,12,7,12,7,5,48,12,10,16,7,10,8,10,6,12,7,41,17,8,12,13,26,10,30,20,19,5,2,20,26,5,41,13,8,12,9,10,9,11,12,12,10,12,13,8,13,21,9,11,10,9,10,11,24,12,10,12,26,11,8,32,12,12,47,9,4,12,11,9,9,9,7,8,12,11,10,11,7,10,10,4,13,11,5,7,25,12,12,27,12,26,7,2,12,13,9,10,13,13,26,11,9,12,23,25,10,12,25,11,11,34,7,12,13,12,11,8,12,19,12,12,36,11,4,26,25,11,13,12,9,10,13,27,13,32,10,2,2,7,24,7,10,9,10,44,4,2,12,11,9,13,22,10,12,9,11,10,10,12,12,11,10,12,10,23,12,10,25,21,13,22,7,5,10,22,10,13,24,10,8,4,24,39,12,25,13,13,21,12,10,3,11,9,9,21,12,21,13,7,9,12,10,13,9,2,10,3,12,10,59,11,11,34,11,10,8,12,13,4,12,9,10,3,18,11,11,13,11,12,12,13,12,12,11,11,14,13,19,12,13,12,4,12,11,12,12,13,11,12,7,9,13,3,7,12,12,17,4,10,16,11,10,11,13,12,13,7,12,18,13,11,10,11,18,23,12,12,21,12,13,5,13,12,8,10,12,8,13,16,11,11,13,18,11,27,12,10,7,7,13,7,8,7,12,22,9,9,10,13,11,33,10,11,13,16,10,12,10,48,6,5,12,31,12,12,12,9,12,18,7,11,9,13,17,9,10,13,13,22,37,12,14,11,12,10,12,11,11,34,11,38,18,12,4,11,34,7,13,12,21,5,35,10,10,6,9,7,49,11,10,7,9,12,11,13,20,12,9,11,9,13,7,5,11,24,13,8,59,10,4,8,2,12,20,11,11,18,12,9,12,6,11,5,18,13,9,12,10,61,10,13,9,10,13,11,4,10,25,12,12,9,9,9,4,13,12,9,8,11,7,10,11,11,26,18,12,13,7,11,7,12,9,11,12,9,10,13,19,16,10,12,13,9,12,10,13,11,10,51,10,11,19,9,8,8,14,11,30,10,5,7,12,31,12,25,12,13,27,10,8,12,10,3,11,9,35,10,10,7,6,10,10,8,17,26,27,28,7,11,10,27,12,12,27,13,10,13,13,10,28,4,20,10,13,10,12,11,7,13,26,7,12,9,8,7,12,24,7,10,11,10,7,8,20,11,19,12,2,11,10,12,7,15,7,4,3,9,8,9,6,11,11,13,13,7,22,6,2,10,28,12,10,4,13,12,5,24,12,5,37,22,8,26,36,7,11,9,13,30,11,25,13,12,7,13,32,20,11,9,13,10,5,12,7,13,7,13,7,17,11,12,12,12,11,18,13,3,7,12,21,21,13,12,11,26,9,13,10,35,21,36,22,12,19,12,10,10,26,22,11,12,4,13,2,12,4,9,11,9,4,11,13,13,9,11,11,10,21,10,12,7,3,12,13,10,47,22,7,20,12,13,18,11,8,9,10,13,8,12,10,20,4,13,9,11,11,12,11,12,11,9,10,33,14,13,10,12,11,11,3,9,8,10,7,23,13,8,11,12,11,12,11,10,6,11,11,9,20,12,23,13,13,12,9,5,9,15,5,10,16,10,11,5,7,12,7,13,11,12,7,11,12,7,13,11,10,13,9,10,4,10,12,27,12,6,11,10,12,13,13,7,17,12,11,12,10,15,8,25,8,7,21,7,12,12,12,22,12,9,11,12,26,11,10,10,8,13,37,11,18,9,4,9,7,9,5,10,26,11,12,20,12,34,13,8,12,11,19,12,9,19,9,12,9,9,12,12,11,10,9,12,8,9,11,10,13,11,10,6,7,9,12,7,10,10,13,10,7,13,8,12,19,22,7,11,7,13,12,13,7,19,12,54,25,12,13,12,15,9,25,9,10,20,6,11,35,33,50,7,10,11,6,13,9,9,9,10,10,20,7,9,22,14,12,10,7,31,18,13,7,17,9,11,12,2,2,8,9,4,34,15,10,12,13,9,12,12,12,6,13,9,12,22,15,4,7,12,9,20,12,26,9,5,7,4,10,14,13,13,19,7,3,11,12,8,9,10,5,5,9,9,7,6,21,11,6,12,11,10,13,18,12,20,9,9,12,19,12,11,11,16,14,29,26,25,11,13,19,11,9,12,11,5,7,10,13,10,13,9,13,7,11,13,6,11,12,7,5,10,18,9,31,22,7,12,12,4,7,9,12,9,3,9,19,8,13,7,8,13,2,31,4,12,7,10,11,11,10,7,5,9,10,6,14,11,13,4,3,13,5,12,23,9,19,12,12,12,11,27,18,12,12,13,7,11,11,26,12,11,11,12,21,12,13,13,16,11,11,21,9,18,7,13,4,7,12,37,7,30,12,4,27,5,17,12,18,5,11,4,10,13,11,12,7,10,25,11,7,16,6,10,12,8,6,10,10,7,9,23,19,13,11,12,21,11,12,24,4,10,10,11,13,4,2,10,12,10,15,13,7,12,13,10,12,7,18,14,12,15,13,9,11,11,10,9,12,6,13,10,10,11,30,19,5,14,11,17,9,9,7,25,12,4,12,13,23,6,9,47,12,10,12,12,12,9,13,36,13,13,2,13,7,12,36,10,5,10,13,11,30,18,13,11,9,4,32,12,3,11,19,15,10,13,11,13,9,24,10,18,2,9,11,12,13,7,13,10,12,12,12,8,7,10,9,7,12,9,12,7,11,7,9,21,12,25,8,22,11,6,24,9,10,28,16,12,10,13,12,7,12,14,9,13,12,12,9,12,7,12,40,12,11,13,13,13,10,12,12,25,11,10,6,27,12,7,7,38,2,11,12,13,10,13,12,13,12,10,4,9,4,10,2,13,4,11,13,26,9,8,9,2,27,10,12,12,7,12,14,9,18,10,11,13,4,7,9,12,12,22,23,12,11,11,12,13,17,9,12,12,27,13,9,14,7,9,6,13,10,7,15,13,26,5,4,13,13,26,22,10,12,17,30,8,5,6,13,10,13,11,12,11,12,11,13,3,7,12,15,18,10,7,13,12,9,7,12,11,5,11,11,20,12,19,10,12,13,6,19,12,16,11,12,11,10,13,10,4,9,9,12,2,12,7,13,12,6,11,11,9,13,2,23,12,5,23,11,5,8,35,12,5,8,10,24,11,20,13,12,10,5,13,11,25,27,7,10,22,11,27,10,13,18,12,9,9,13,7,15,10,11,2,7,23,2,13,13,10,13,9,9,12,12,10,13,9,10,10,24,11,8,11,13,10,13,5,12,9,13,10,12,13,4,2,26,21,12,9,11,9,12,5,9,10,10,12,23,13,10,13,2,13,26,3,4,11,6,10,9,12,5,13,11,9,11,13,14,12,19,12,22,12,10,12,10,13,9,9,11,18,26,9,10,21,9,21,10,7,13,7,2,9,12,12,10,5,12,11,12,12,11,13,10,12,26,7,6,25,14,10,9,10,11,4,35,4,20,12,13,7,8,10,5,20,19,12,7,7,12,12,5,28,18,13,5,13,9,9,11,23,4,6,24,10,25,13,12,12,12,11,4,12,42,12,11,13,11,12,2,22,9,21,13,17,12,10,10,10,10,12,13,19,8,11,17,5,18,11,12,9,12,9,46,13,13,13,8,9,18,7,12,12,8,9,21,12,7,10,8,11,9,12,10,9,12,2,32,10,10,2,8,12,8,12,9,11,20,2,17,21,11,7,7,13,8,9,9,10,9,21,11,7,12,12,5,19,9,11,9,8,10,14,4,7,12,7,8,22,7,8,10,11,32,10,9,12,22,7,9,66,8,7,12,19,11,4,7,9,37,10,24,12,10,26,9,12,13,13,12,2,36,10,20,13,12,10,10,9,16,33,20,12,12,55,19,10,25,7,17,9,9,7,11,9,7,9,12,13,11,8,9,24,14,5,23,21,7,12,9,12,12,20,12,11,10,6,9,7,11,11,19,21,10,6,5,10,13,11,11,11,26,12,11,7,9,31,26,10,12,7,11,12,20,35,21,11,10,37,3,12,12,10,23,12,2,13,21,12,7,9,12,10,13,54,17,12,12,10,12,25,13,9,10,12,12,28,19,5,7,10,7,8,10,11,11,12,15,13,10,51,10,47,4,9,7,7,9,11,11,19,23,11,12,16,12,12,18,36,8,10,27,10,10,31,10,11,12,12,43,4,46,13,11,7,12,12,12,30,12,7,11,12,13,8,12,78,11,12,11,5,8,9,13,10,9,12,12,12,13,2,12,9,12,8,5,3,9,9,12,4,32,9,12,23,11,27,9,11,25,13,2,12,23,9,13,10,12,12,12,24,20,7,11,11,3,9,12,47,13,4,26,21,6,12,27,13,43,12,5,10,19,10,13,9,17,13,6,9,22,6,9,13,7,20,12,10,7,12,7,9,20,10,11,11,11,13,10,7,13,2,9,11,37,7,10,29,12,19,10,10,7,32,7,8,12,11,10,17,9,13,12,9,7,19,2,9,12,11,9,13,12,12,12,13,11,32,8,10,9,7,12,7,3,12,12,7,9,13,13,13,11,10,16,35,7,36,10,12,22,24,12,12,9,9,54,24,10,9,13,13,5,18,12,13,10,11,7,11,7,11,8,4,6,13,10,9,11,12,10,19,21,12,5,12,11,13,21,13,13,18,28,21,17,9,12,5,12,39,24,10,12,12,17,13,10,11,7,8,5,10,18,12,12,8,12,9,14,9,13,25,9,17,23,12,12,10,12,12,11,4,11,20,8,2,12,13,12,13,12,7,21,21,13,12,9,9,8,11,22,10,21,13,12,10,6,11,7,12,12,17,19,27,10,10,12,10,6,10,24,13,20,13,7,7,29,12,10,12,30,13,10,12,28,11,9,14,9,11,15,12,12,7,10,13,9,6,11,11,26,12,12,12,10,6,7,6,13,11,12,12,13,9,11,2,12,13,18,8,10,10,7,12,9,11,10,21,22,8,11,6,16,7,7,12,7,32,9,11,23,12,12,25,11,7,11,12,7,8,17,9,21,11,10,12,13,22,20,7,13,22,8,3,13,12,8,3,10,36,6,13,19,10,12,9,17,15,31,9,10,12,7,35,12,17,16,10,10,12,11,12,11,9,10,12,13,13,5,16,7,13,9,24,12,13,4,11,17,11,9,17,9,10,12,13,7,16,8,11,7,10,19,10,13,21,12,7,12,8,2,13,11,12,12,12,3,6,10,2,12,8,12,9,14,11,12,12,13,11],"type":"box","name":"QUEENS","marker":{"color":"rgba(93,200,99,1)","line":{"color":"rgba(93,200,99,1)"}},"line":{"color":"rgba(93,200,99,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","y":[19,12,26,9,68,10,19,13,14,10,13,10,8,9,7,11,12,12,10,28,5,15,12,5,12,21,12,3,13,11,10,20,11,12,13,12,7,12,13,12,20,10,12,23,12,28,12,11,13,28,10,24,2,12,13,8,10,24,15,9,26,7,40,4,5,7,13,12,11,16,11,9,13,3,12,11,12,12,4,12,13,13,11,11,7,48,20,12,12,11,13,12,22,13,13,19,29,12,12,11,12,12,7,10,10,10,44,12,11,10,13,10,12,7,9,5,12,12,12,11,19,23,12,12,7,9,12,10,23,9,13,31,12,19,10,11,10,23,12,12,12,13,27,22,29,12,34,11,7,12,7,25,6,13,21,12,9,13,9,5,12,18,12,10,11,11,12,9,9,9,9,10,9,9,9,12,12,21,12,10,13,10,11,12,7,12,26,11,13,31,6,12,13,11,7,9,8,7,11,10,11,13,9,39,12,12,21,13,25,13,11,8,9,13,13,12,13,7,27,12,8,25,7,25,12,4,12,12,10,5,2,10,12,13,7,9,12,10,48,13,10,4,21,13,18,13,6,12,12,18,10,7,37,28,9,13,14,9,10,39,8,7,12,11,12,12,10,11,13,12,12,12,18,10,7,13,13,44,11,9,28,12,13,12,13,8,12,12,12,39,10,13,13,10,18,10,13,11,12,10,8,7,9,7,12,9,7,12,26,12,9,13,13,10,13,12,9,7,13,7,13,9,13,13,12,9,24,9,9,7,20,18,10,11,7,14,12,10,20,13,12,10,20,10,15,18,12,12,18],"type":"box","name":"STATEN ISLAND","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-
-
-
 
 </div>
 
 <script>
+$(document).ready(function() {
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed table-sm');
 
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
+  // initialize mathjax
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+
 });
-
-
 </script>
 
-<!-- tabsets -->
-
-<script>
+<script type="text/javascript">
 $(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+  FlexDashboard.init({
+    fillPage: true,
+    orientation: "columns",
+    storyboard: false,
+    defaultFigWidth: 576,
+    defaultFigHeight: 460,
+    defaultFigWidthMobile: 360,
+    defaultFigHeightMobile: 460,
+    resize_reload: true
+  });
+  var navbar = $(".navbar").first();
+  var body = $("body").first();
+  var sidebar = $(".section.sidebar").first();
+  function addNavbarPadding() {
+    var navHeight = navbar.outerHeight();
+    body.css("padding-top", (navHeight + 8) + "px");
+    sidebar.css("top", navHeight + "px");
+    var resizeEvent = window.document.createEvent("UIEvents");
+    resizeEvent.initUIEvent("resize", true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
+  }
+  if (!window.Shiny) setTimeout(addNavbarPadding, 100);
+  $(document).on("shiny:idle", function() {
+    setTimeout(addNavbarPadding, 50);
   });
 });
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
 </script>
 
 </body>
