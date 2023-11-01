@@ -28,17 +28,22 @@ rest_inspec = rest_inspec |>
 {data-width=650}
 -----------------------------------------------------------------------
 
-### Scores by each borough 
+### Common cuisine type in NYC
 
-```{r message=FALSE, echo=FALSE}
-rest_inspec |> 
-  group_by(boro) |> 
-  plot_ly(y = ~score, color = ~boro, type = "box", colors = "viridis") |> 
-  layout(
-    xaxis = list(title = "Borough"),
-    yaxis = list(title = "Score")
-    )
+```{r include=FALSE}
+rest_inspec_cuisine = rest_inspec |> 
+  group_by(cuisine_description) |> 
+  summarise(count = n())
+
+cui_sco = treemap(rest_inspec_cuisine, index = "cuisine_description",
+              vSize = "count", vColor = "count",
+              type = "value") 
 ```
+
+```{r echo=FALSE, warning=FALSE}
+hctreemap(cui_sco, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") 
+```
+
 
 {data-width=350}
 -----------------------------------------------------------------------
@@ -60,19 +65,15 @@ rest_inspec |>
     )
 ```
 
-### Common cuisine type in NYC
+### Scores by each borough 
 
-```{r include=FALSE}
-rest_inspec_cuisine = rest_inspec |> 
-  group_by(cuisine_description) |> 
-  summarise(count = n())
-
-cui_sco = treemap(rest_inspec_cuisine, index = "cuisine_description",
-              vSize = "count", vColor = "count",
-              type = "value") 
-```
-
-```{r echo=FALSE, warning=FALSE}
-hctreemap(cui_sco, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") 
+```{r message=FALSE, echo=FALSE}
+rest_inspec |> 
+  group_by(boro) |> 
+  plot_ly(y = ~score, color = ~boro, type = "box", colors = "viridis") |> 
+  layout(
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Score")
+    )
 ```
 
