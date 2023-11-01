@@ -4,6 +4,9 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    navbar:
+      - { title: "Home", href: "index.html", align: right }
+      - { title: "About me", href: "about.html", align: right }
 ---
 
 ```{r message=FALSE, echo=FALSE}
