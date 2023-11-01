@@ -1,0 +1,78 @@
+---
+title: "NYC Restaurant Inspection Results"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r message=FALSE, echo=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(flexdashboard)
+library(plotly)
+library(treemap)
+library(highcharter)
+
+data("rest_inspec")
+
+set.seed(1)
+
+rest_inspec = rest_inspec |> 
+  drop_na() |> 
+  filter(boro != "Missing") |> 
+  sample_n(size = 10000)
+```
+
+
+{data-width=650}
+-----------------------------------------------------------------------
+
+### Scores by each borough 
+
+```{r message=FALSE, echo=FALSE}
+rest_inspec |> 
+  group_by(boro) |> 
+  plot_ly(y = ~score, color = ~boro, type = "box", colors = "viridis") |> 
+  layout(
+    xaxis = list(title = "Borough"),
+    yaxis = list(title = "Score")
+    )
+```
+
+{data-width=350}
+-----------------------------------------------------------------------
+
+### Proportion of grading in each year
+
+```{r message=FALSE, echo=FALSE}
+rest_inspec |> 
+  separate(grade_date, into = c("year", "month", "day")) |> 
+  group_by(year, grade) |> 
+  summarise(n = n()) |> 
+  group_by(year) |> 
+  mutate(p = round(n/sum(n)*100, 2)) |> 
+  plot_ly(x = ~year, y = ~p, color = ~grade,
+          type = "bar", colors = "viridis") |> 
+  layout(
+    yaxis = list(title = "Percentage (%)"),
+    xaxis = list(title = "Year")
+    )
+```
+
+### Common cuisine type in NYC
+
+```{r include=FALSE}
+rest_inspec_cuisine = rest_inspec |> 
+  group_by(cuisine_description) |> 
+  summarise(count = n())
+
+cui_sco = treemap(rest_inspec_cuisine, index = "cuisine_description",
+              vSize = "count", vColor = "count",
+              type = "value") 
+```
+
+```{r echo=FALSE, warning=FALSE}
+hctreemap(cui_sco, allowDrillToNode = TRUE, layoutAlgorithm = "squarified") 
+```
+
