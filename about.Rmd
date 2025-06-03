@@ -5,7 +5,7 @@ output:
     toc: false
     toc_float: false
 ---
-Updated: October 31, 2023
+Updated: June 3rd, 2025
 $$\\$$
 
 
@@ -15,11 +15,11 @@ tabl <- "
 |       |          | 
 |---------------|:--------------|
 | 04/2014-03/2020       | **Hamamatsu University School of Medicine, Shizuoka, Japan** | 
-||Doctor of Medicine (MD), March 2020  |
+||Doctor of Medicine (MD)  |
 | 04/2022-03/2023      | **St. Luke’s International University Graduate School of Public Health, Tokyo, Japan**      |  
-||Master of Public Health (MPH), March 2023 |
-| 09/2023-present | **Columbia University Mailman School of Public Health, New York, NY**     |  
-||Master of Science in Biostatistics, Expected graduation: May 2025 |
+||Master of Public Health (MPH) |
+| 09/2023-05/2025 | **Columbia University Mailman School of Public Health, New York, NY**     |  
+||Master of Science (MS) in Biostatistics - Public Health Data Science Track |
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
@@ -32,23 +32,44 @@ $$\\$$
 tabl <- "
 |       |          | 
 |---------------|:--------------|
-| 04/2020-03/2022       | Full-time Resident Physician at Keio University Hospital, Tokyo, Japan | 
+| 04/2020-03/2022       | **Full-time Resident Physician at Keio University Hospital, Tokyo, Japan** | 
+|        | • Provide direct patient care under supervision, including history-taking, physical exams, and clinical decision-making  | 
+| 05/2024-12/2025       | **Full/Part-time Content Intern at MDCalc, New York** | 
+|        | • Collaborate with the editorial and medical content teams to research and develop high-quality clinical decision tools used by healthcare professionals globally  | 
+| 10/2024-Present       | **Part-time Research Assistant (Biostatistics) at Tokyo Medical University Gastroenterology Dept., Tokyo, Japan** | 
+|        | • Provide biostatistics consulting for physician-led research projects, including study design, sample size estimation, data analysis, and reporting  | 
 "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 $$\\$$
 
-### Research in Progress
-Nobuhisa Morimoto, Hasan Jamil, Mohab Alakkari, Yuki Joyama, Tatsuhiko Anzai, Kunihiko Takahashi, Soichiro Iimori.   
-Associations between dietary potassium intake and urinary potassium excretion.   
-PROSPERO 2022 CRD42022357847 [[link]](https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42022357847) 
+### Research Experience
+**Published**  
+Evaluation of cesarean delivery risk by physician sex. Joyama Y, Hayasaka M, Robbins LS, Saade G, Kawakita T.
+American journal of perinatology. May 19, 2025. doi:10.1055/a-2615-5055. [[link]](https://pubmed.ncbi.nlm.nih.gov/40389258/)  
+
+Associations between dietary potassium intake and urinary potassium excretion: a protocol for systematic review and meta-analysis. Morimoto N, Jamil H, Alakkari M, Joyama Y, et al.
+Syst Rev. 2024;13(1):185. doi:10.1186/s13643-024-02603-3. [[link]](https://pubmed.ncbi.nlm.nih.gov/39020425/)
+
+**In Progress**  
+Safety assessment of endoscopic papillectomy in older patients (≥75 years old)  
+• Planning and performing statistical analysis using data from electronic health record  
+
+Analysis of endoscopic techniques to prevent delayed bleeding after endoscopic papillectomy  
+• Designed and conducted propensity score-matched cohort analyses to assess clinical outcomes; in process of submission  
+
+**Academic Projects**  
+Investigation of menopause as a moderator in the relationship between physical activity and cognitive aging    
+• Collaborated with school faculty (Dr. Seonjoo Lee) to conduct data visualization and regression analyses, assessing the moderating role of menopausal status on cognitive benefits of physical activity
+
 
 $$\\$$
 
 ### Skills
-**Computer**: R, Stata, Git  
-**Languages**: Japanese (Native), English (Professional working proficiency), Chinese (Limited working proficiency)
+**Data Analysis and Visualization**: R, SAS, Stata, Shiny, SQL, Metabase  
+**Computer**: JavaScript, HTML, Git, Microsoft Office  
+**Languages**: Japanese (fluent), English (proficient), Chinese (conversational)
 
 
 

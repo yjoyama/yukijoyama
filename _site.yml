@@ -5,10 +5,8 @@ navbar:
   right:
     - text: "About me"
       href: about.html
-    - text: "Dashboard"
-      href: dashboard.html
     - icon: fa-envelope fa-lg
-      href: mailto:<yj2803@cumc.columbia.edu>
+      href: mailto:<yjoyama2022@gmail.com>
     - icon: fa-github fa-lg
       href: http://github.com/yjoyama/
     - icon: fa-brands fa-linkedin

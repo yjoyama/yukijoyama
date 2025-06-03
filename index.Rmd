@@ -1,5 +1,5 @@
 ---
-title: "Yuki Joyama"
+title: "Yuki Joyama, MD, MPH, MS"
 output: 
   html_document:
     toc: false
@@ -10,17 +10,19 @@ $$\\$$
 
 ### Welcome to my website
 
-![](./images/GPTempDownload 2.jpg){width=50%}
+<p align="center">
+  <img src="./images/IMG_E63001509AFF-1.jpeg" width="50%">
+</p>
 
-I am currently an MS Biostatistics student at Columbia University.
+I am a physician-biostatistician, based in New York, committed to preventing life-threatening diseases through evidence-based research and innovative technology.  
+I transform clinical and population-health questions into actionable insights by designing studies, cleaning and analyzing data, and translating results for clinicians, policymakers, and patients.   
+I also have several years of experience in patient-facing role from my residency program in Japan.   
+My early-career mission is to harness biostatistical methods for biological, clinical, and epidemiological research that can improve millions of lives worldwide. 
 
 You can find my academic and professional experience [here](about.html).
 
 $$\\$$
 
 ### Contact Information
-Yuki Joyama  
-MS Biostatistics candidate  
-Columbia University Mailman School of Public Health  
-722 W 168th St, New York, NY 10032  
-yj2803@cumc.columbia.edu
+I welcome collaboration with researchers and clinicians. Please contact me for consultations at:  
+yjoyama2022@gmail.com
