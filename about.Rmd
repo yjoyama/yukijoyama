@@ -6,7 +6,7 @@ output:
     toc_float: false
 ---
 Updated: June 3rd, 2025
-$$\\$$
+<br><br>
 
 
 ### Education
@@ -25,7 +25,7 @@ cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
 
-$$\\$$
+<br><br>
 
 ### Work Experience
 ```{r ,echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
@@ -42,7 +42,7 @@ tabl <- "
 cat(tabl) # output the table in a format good for HTML/PDF/docx conversion
 ```
 
-$$\\$$
+<br><br>
 
 ### Research Experience
 **Published**  
@@ -64,7 +64,7 @@ Investigation of menopause as a moderator in the relationship between physical a
 • Collaborated with school faculty (Dr. Seonjoo Lee) to conduct data visualization and regression analyses, assessing the moderating role of menopausal status on cognitive benefits of physical activity
 
 
-$$\\$$
+<br><br>
 
 ### Skills
 **Data Analysis and Visualization**: R, SAS, Stata, Shiny, SQL, Metabase  

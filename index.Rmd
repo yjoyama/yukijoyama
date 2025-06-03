@@ -6,14 +6,14 @@ output:
     toc_float: false
 ---
 
-$$\\$$
+<br><br>
 
 ### Welcome to my website
-
+<br>
 <p align="center">
   <img src="./images/IMG_E63001509AFF-1.jpeg" width="50%">
 </p>
-
+<br>
 I am a physician-biostatistician, based in New York, committed to preventing life-threatening diseases through evidence-based research and innovative technology.  
 I transform clinical and population-health questions into actionable insights by designing studies, cleaning and analyzing data, and translating results for clinicians, policymakers, and patients.   
 I also have several years of experience in patient-facing role from my residency program in Japan.   
@@ -21,7 +21,7 @@ My early-career mission is to harness biostatistical methods for biological, cli
 
 You can find my academic and professional experience [here](about.html).
 
-$$\\$$
+<br><br>
 
 ### Contact Information
 I welcome collaboration with researchers and clinicians. Please contact me for consultations at:  
