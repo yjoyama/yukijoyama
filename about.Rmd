@@ -34,7 +34,7 @@ tabl <- "
 |---------------|:--------------|
 | 04/2020-03/2022       | **Full-time Resident Physician at Keio University Hospital, Tokyo, Japan** | 
 |        | • Provide direct patient care under supervision, including history-taking, physical exams, and clinical decision-making  | 
-| 05/2024-12/2025       | **Full/Part-time Content Intern at MDCalc, New York** | 
+| 05/2024-12/2024       | **Full/Part-time Content Intern at MDCalc, New York** | 
 |        | • Collaborate with the editorial and medical content teams to research and develop high-quality clinical decision tools used by healthcare professionals globally  | 
 | 10/2024-Present       | **Part-time Research Assistant (Biostatistics) at Tokyo Medical University Gastroenterology Dept., Tokyo, Japan** | 
 |        | • Provide biostatistics consulting for physician-led research projects, including study design, sample size estimation, data analysis, and reporting  | 
